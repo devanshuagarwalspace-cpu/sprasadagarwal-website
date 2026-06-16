@@ -1958,7 +1958,7 @@
     };
     Object.keys(placeholders).forEach(id => {
       const el = document.getElementById(id);
-      let html = '<div class="news-error" style="color:#C9A84C;padding-bottom:10px;">⚠ Add your rss2json API key to activate live updates.</div>';
+      let html = '<div class="news-error" style="color:#C9A84C;padding-bottom:10px;"></div>';
       placeholders[id].forEach(([date, title]) => {
         html += `<div class="news-item"><div class="news-date">${date}</div><div class="news-title">${title}</div></div>`;
       });
