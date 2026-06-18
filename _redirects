@@ -1,0 +1,10 @@
+# Netlify proxy rules — these make Netlify's own servers fetch each TaxGuru
+# feed on behalf of the browser, so the page never needs a third-party CORS
+# proxy. The 200 status code is what makes this a proxy/rewrite rather than
+# a redirect: the browser keeps seeing your own domain throughout.
+
+/api/feed-income-tax  https://taxguru.in/category/income-tax/feed/                      200
+/api/feed-gst         https://taxguru.in/category/goods-and-service-tax/feed/           200
+/api/feed-mca         https://taxguru.in/category/corporate-law/feed/                   200
+/api/feed-judiciary   https://taxguru.in/type/judiciary-2/feed/                         200
+/api/feed-rbi         https://taxguru.in/category/rbi/feed/                            200
