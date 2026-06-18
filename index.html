@@ -677,7 +677,20 @@
   .news-date { font-size: 10.5px; color: var(--bronze); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.02em; }
   .news-title { font-size: 13px; font-weight: 500; color: var(--charcoal); line-height: 1.5; transition: var(--transition); }
   .news-item:hover .news-title { color: var(--bronze-dark); }
-  .news-loading, .news-error { font-size: 12.5px; color: var(--text-faint); padding: 12px 0; }
+  .news-loading { font-size: 12.5px; color: var(--text-faint); padding: 12px 0; }
+  .news-fallback {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    padding: 18px; border: 1px dashed var(--border); border-radius: 11px;
+    background: var(--sand-soft);
+  }
+  .news-fallback svg { color: var(--bronze); }
+  .news-fallback p { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+  .news-fallback a {
+    font-size: 12.5px; font-weight: 700; color: var(--bronze-dark);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    transition: var(--transition);
+  }
+  .news-fallback a:hover { color: var(--bronze); gap: 8px; }
   .news-feed-credit { font-size: 10px; color: var(--text-faint); margin-top: 10px; text-align: right; letter-spacing: 0.02em; }
   .news-source-credit { text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-faint); }
   .news-source-credit a { color: var(--bronze); text-decoration: none; font-weight: 600; }
@@ -1708,39 +1721,63 @@ const newsFeeds = [
   { id: 'feed-rbi',       url: '/api/feed-rbi',        sourceUrl: 'https://taxguru.in/category/rbi/feed/',                               count: 6 }
 ];
 
+function renderFeedItems(container, xmlText, feed) {
+  const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+  const items = Array.from(xml.querySelectorAll('item')).slice(0, feed.count);
+  if (items.length === 0) {
+    container.innerHTML = '<div class="news-fallback">'
+      + '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>'
+      + '<p>No recent items found in this category right now.</p>'
+      + '<a href="https://taxguru.in" target="_blank" rel="noopener">Browse the latest on TaxGuru →</a>'
+      + '</div>';
+    return;
+  }
+  // Each <link> below is the original TaxGuru article permalink straight from
+  // the RSS feed itself — clicking any headline opens that exact article.
+  container.innerHTML = items.map(function(item) {
+    var titleEl = item.querySelector('title');
+    var linkEl = item.querySelector('link');
+    var dateEl = item.querySelector('pubDate');
+    var title = titleEl ? titleEl.textContent : 'Untitled update';
+    var link = linkEl ? linkEl.textContent : feed.sourceUrl;
+    var dateObj = dateEl ? new Date(dateEl.textContent) : null;
+    var date = (dateObj && !isNaN(dateObj)) ? dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    return '<a href="' + link + '" target="_blank" rel="noopener" class="news-item">'
+      + '<div class="news-date">' + date + '</div>'
+      + '<div class="news-title">' + title + '</div>'
+      + '</a>';
+  }).join('');
+}
+
+function showFeedFallback(container) {
+  container.innerHTML = '<div class="news-fallback">'
+    + '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>'
+    + '<p>Live updates are temporarily unavailable in this category.</p>'
+    + '<a href="https://taxguru.in" target="_blank" rel="noopener">View directly on TaxGuru →</a>'
+    + '</div>';
+}
+
 function loadFeed(feed) {
   const container = document.getElementById(feed.id);
 
+  // Attempt 1: same-origin path, proxied server-side by Netlify (see _redirects).
   fetch(feed.url)
     .then(function(r) {
       if (!r.ok) throw new Error('Network response was not ok');
       return r.text();
     })
-    .then(function(xmlText) {
-      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item')).slice(0, feed.count);
-      if (items.length === 0) {
-        container.innerHTML = '<div class="news-error">No updates found. <a href="https://taxguru.in" target="_blank" style="color:#8F5E2A">Visit TaxGuru →</a></div>';
-        return;
-      }
-      // Each <link> below is the original TaxGuru article permalink straight from
-      // the RSS feed itself — clicking any headline opens that exact article.
-      container.innerHTML = items.map(function(item) {
-        var titleEl = item.querySelector('title');
-        var linkEl = item.querySelector('link');
-        var dateEl = item.querySelector('pubDate');
-        var title = titleEl ? titleEl.textContent : 'Untitled update';
-        var link = linkEl ? linkEl.textContent : feed.sourceUrl;
-        var dateObj = dateEl ? new Date(dateEl.textContent) : null;
-        var date = (dateObj && !isNaN(dateObj)) ? dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
-        return '<a href="' + link + '" target="_blank" rel="noopener" class="news-item">'
-          + '<div class="news-date">' + date + '</div>'
-          + '<div class="news-title">' + title + '</div>'
-          + '</a>';
-      }).join('');
-    })
+    .then(function(xmlText) { renderFeedItems(container, xmlText, feed); })
     .catch(function() {
-      container.innerHTML = '<div class="news-error">Could not load updates. <a href="https://taxguru.in" target="_blank" style="color:#8F5E2A">Visit TaxGuru →</a></div>';
+      // Attempt 2: backup public CORS proxy, only if the same-origin path
+      // failed — covers the case where _redirects hasn't deployed yet.
+      const backupUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(feed.sourceUrl);
+      fetch(backupUrl)
+        .then(function(r) {
+          if (!r.ok) throw new Error('Backup proxy failed too');
+          return r.text();
+        })
+        .then(function(xmlText) { renderFeedItems(container, xmlText, feed); })
+        .catch(function() { showFeedFallback(container); });
     });
 }
 newsFeeds.forEach(loadFeed);
