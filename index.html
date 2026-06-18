@@ -31,954 +31,870 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #0D1B2A;
-    --navy-light: #1a2e42;
-    --gold: #C9A84C;
-    --gold-light: #e8c96a;
-    --gold-pale: #f5e9c8;
+    /* ── SAND / BRONZE / OLIVE PALETTE ── */
+    --sand: #E6DFCE;
+    --sand-soft: #EFEAE0;
+    --sand-deep: #DCD3BC;
+    --cream: #F8F5EC;
     --white: #ffffff;
-    --off-white: #f8f7f4;
-    --gray-50: #f9f9f9;
-    --gray-100: #f0efec;
-    --gray-200: #e0deda;
-    --gray-400: #9e9c98;
-    --gray-600: #5a5855;
-    --gray-800: #2e2d2b;
-    --text: #1a1917;
-    --text-muted: #6b6966;
+    --bronze: #8F5E2A;
+    --bronze-light: #B97A45;
+    --bronze-dark: #6E5424;
+    --bronze-pale: #EAD9BD;
+    --olive-line: rgba(120,100,60,0.16);
+    --grid-line: rgba(120,100,60,0.13);
+    --charcoal: #2A2517;
+    --charcoal-soft: #3D3624;
+    --charcoal-deep: #1E1B11;
+    --text: #2A2517;
+    --text-muted: #74684A;
+    --text-faint: #9C8F6E;
+    --text-on-dark: #EDE9DC;
+    --text-on-dark-muted: #B8AE92;
+    --border: #DCD0AE;
+    --border-soft: rgba(120,100,60,0.18);
+    --shadow-sm: 0 2px 12px rgba(42,37,23,0.06);
+    --shadow-md: 0 12px 36px rgba(42,37,23,0.10);
+    --shadow-lg: 0 20px 60px rgba(42,37,23,0.14);
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --font-head: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     color: var(--text);
-    background: var(--white);
+    background: var(--cream);
     line-height: 1.7;
     font-size: 15px;
     overflow-x: hidden;
+    cursor: default;
   }
 
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--gray-100); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  h1, h2, h3, h4 { font-family: var(--font-head); }
+
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: var(--sand-soft); }
+  ::-webkit-scrollbar-thumb { background: var(--bronze); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--bronze-light); }
+
+  ::selection { background: var(--bronze-pale); color: var(--charcoal); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--bronze), var(--bronze-light));
+    z-index: 9999; width: 0%;
+    transition: width 0.15s ease;
+    box-shadow: 0 0 8px rgba(143,94,42,0.5);
+  }
 
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    background: rgba(13,27,42,0.97);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
+    background: rgba(248,245,236,0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-soft);
     padding: 0 5%;
     display: flex; align-items: center; justify-content: space-between;
-    height: 72px;
+    height: 76px;
     transition: var(--transition);
   }
   nav.scrolled {
     height: 64px;
-    background: rgba(13,27,42,0.99);
-    box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+    background: rgba(248,245,236,0.98);
+    box-shadow: 0 4px 24px rgba(42,37,23,0.07);
   }
-  .nav-brand {
-    display: flex; align-items: center; gap: 14px; text-decoration: none;
-  }
+  .nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
   .nav-logo-icon {
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, var(--gold) 0%, #e8c96a 100%);
-    border-radius: 8px;
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-light) 100%);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-head);
     font-size: 18px; font-weight: 700;
-    color: var(--navy);
+    color: var(--cream);
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
     transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(143,94,42,0.25);
   }
   .nav-logo-icon::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(255,255,255,0.15);
-    opacity: 0;
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.18); opacity: 0;
     transition: var(--transition);
   }
+  .nav-brand:hover .nav-logo-icon { transform: rotate(-4deg) scale(1.05); }
   .nav-brand:hover .nav-logo-icon::after { opacity: 1; }
   .nav-brand-text { display: flex; flex-direction: column; }
-  .nav-firm-name {
-    font-size: 14.5px; font-weight: 600; color: var(--white);
-    line-height: 1.2; letter-spacing: 0.01em;
-  }
-  .nav-tagline { font-size: 11px; color: var(--gold); letter-spacing: 0.08em; font-weight: 400; }
-  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-firm-name { font-family: var(--font-head); font-size: 14.5px; font-weight: 700; color: var(--charcoal); line-height: 1.2; letter-spacing: -0.01em; }
+  .nav-tagline { font-size: 10.5px; color: var(--bronze); letter-spacing: 0.1em; font-weight: 500; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
   .nav-links a {
-    color: rgba(255,255,255,0.75);
-    text-decoration: none; font-size: 13.5px; font-weight: 500;
-    letter-spacing: 0.02em;
-    transition: var(--transition);
-    position: relative;
-    padding-bottom: 3px;
+    color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.01em; transition: var(--transition); position: relative; padding-bottom: 4px;
   }
   .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 1.5px; background: var(--gold);
-    transition: width var(--transition);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+    background: var(--bronze); border-radius: 2px; transition: width var(--transition);
   }
-  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover { color: var(--bronze-dark); }
   .nav-links a:hover::after { width: 100%; }
   .nav-cta {
-    background: var(--gold); color: var(--navy) !important;
-    padding: 9px 22px !important; border-radius: 6px;
-    font-weight: 600 !important; font-size: 13px !important;
-    letter-spacing: 0.03em !important;
-    transition: all var(--transition) !important;
-    white-space: nowrap;
+    background: var(--charcoal) !important; color: var(--cream) !important;
+    padding: 10px 24px !important; border-radius: 8px;
+    font-weight: 700 !important; font-size: 13px !important;
+    letter-spacing: 0.02em !important; transition: all var(--transition) !important; white-space: nowrap;
   }
   .nav-cta:hover {
-    background: var(--gold-light) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(201,168,76,0.35) !important;
+    background: var(--bronze) !important; transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(143,94,42,0.3) !important;
   }
   .nav-cta::after { display: none !important; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+  .hamburger span { width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: var(--transition); }
+
+  /* ── SUB-NAV ── */
+  .subnav {
+    position: fixed; top: 76px; left: 0; right: 0; z-index: 998;
+    background: var(--sand-soft);
+    border-bottom: 1px solid var(--border);
+    height: 50px;
+    transition: top var(--transition);
+    box-shadow: 0 2px 10px rgba(42,37,23,0.04);
+  }
+  .subnav.scrolled { top: 64px; }
+  .subnav-inner {
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    gap: 36px; padding: 0 5%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav-inner a {
+    color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.01em; white-space: nowrap; position: relative; padding: 6px 2px;
+    transition: var(--transition); flex-shrink: 0;
+  }
+  .subnav-inner a::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+    background: var(--bronze); border-radius: 2px;
+    transition: width var(--transition), left var(--transition);
+  }
+  .subnav-inner a:hover { color: var(--bronze-dark); }
+  .subnav-inner a:hover::after, .subnav-inner a.active::after { width: 100%; left: 0; }
+  .subnav-inner a.active { color: var(--bronze-dark); }
+
 
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
-    background: var(--navy);
+    background: var(--sand);
     display: flex; align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 120px 5% 80px;
-  }
-  .hero-bg-pattern {
-    position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      radial-gradient(ellipse 800px 600px at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 600px 400px at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    position: relative; overflow: hidden;
+    padding: 176px 5% 90px;
   }
   .hero-grid-lines {
     position: absolute; inset: 0; pointer-events: none;
     background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridMove 20s linear infinite;
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    animation: gridDrift 11s linear infinite;
   }
-  @keyframes gridMove {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 60px 60px, 60px 60px; }
+  @keyframes gridDrift {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 56px 56px, 56px 56px; }
   }
-  .hero-accent-line {
-    position: absolute; top: 0; right: 25%;
-    width: 1px; height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.2), transparent);
-    animation: linePulse 4s ease-in-out infinite;
+  .hero-cursor-glow {
+    position: absolute; width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(143,94,42,0.10) 0%, transparent 70%);
+    pointer-events: none; z-index: 1;
+    left: 0; top: 0;
+    transform: translate(-50%,-50%);
+    transition: left 0.5s ease-out, top 0.5s ease-out;
   }
-  @keyframes linePulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
+  .hero-flow-line {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
   }
+  .flow-path {
+    stroke-dasharray: 7 9;
+    animation: flowMarch 2.4s linear infinite;
+  }
+  @keyframes flowMarch {
+    to { stroke-dashoffset: -160; }
+  }
+  .orbit-zone {
+    position: absolute; top: 168px; right: 13%;
+    width: 150px; height: 150px;
+    pointer-events: none; z-index: 2;
+  }
+  .orbit-ring {
+    position: absolute; inset: 0;
+    border: 1px dashed var(--bronze-dark);
+    border-radius: 50%;
+    opacity: 0.32;
+    animation: ringSpin 16s linear infinite;
+  }
+  .orbit-ring-inner {
+    position: absolute; inset: 26px;
+    border: 1px solid var(--bronze-dark);
+    border-radius: 50%;
+    opacity: 0.22;
+  }
+  @keyframes ringSpin { to { transform: rotate(360deg); } }
+  .orbit-rotator {
+    position: absolute; inset: 0;
+    animation: ringSpin 13s linear infinite;
+  }
+  .orbit-calc {
+    position: absolute; top: -3px; left: 50%;
+    margin-left: -19px;
+    width: 38px; height: 48px;
+    animation: counterSpin 13s linear infinite;
+    filter: drop-shadow(0 6px 14px rgba(42,37,23,0.18));
+  }
+  @keyframes counterSpin { to { transform: rotate(-360deg); } }
+  .orbit-dot {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--bronze);
+    top: 50%; left: -3px; margin-top: -2.5px;
+  }
+
   .hero-content {
-    position: relative; z-index: 2;
-    max-width: 680px;
+    position: relative; z-index: 3; max-width: 660px;
     animation: heroFadeUp 0.9s ease-out both;
   }
   @keyframes heroFadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid rgba(201,168,76,0.35);
-    border-radius: 100px;
-    padding: 6px 16px;
-    margin-bottom: 28px;
-    font-size: 12px; font-weight: 500;
-    color: var(--gold);
-    letter-spacing: 0.06em;
-    background: rgba(201,168,76,0.08);
+    border: 1px solid var(--olive-line); border-radius: 100px;
+    padding: 6px 16px; margin-bottom: 30px;
+    font-size: 11.5px; font-weight: 600; color: var(--bronze-dark);
+    letter-spacing: 0.06em; background: rgba(143,94,42,0.06);
   }
   .hero-badge-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold);
+    width: 6px; height: 6px; border-radius: 50%; background: var(--bronze);
     animation: pulse 2s ease-in-out infinite;
   }
   @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.7; }
+    0%,100% { transform: scale(1); opacity: 1; }
+    50%     { transform: scale(1.5); opacity: 0.6; }
   }
   .hero-eyebrow {
-    font-size: 12px; font-weight: 600;
-    color: var(--gold); letter-spacing: 0.12em;
-    text-transform: uppercase; margin-bottom: 16px;
+    font-size: 12px; font-weight: 700; color: var(--bronze-dark);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px;
   }
   .hero-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 58px);
-    font-weight: 700; line-height: 1.12;
-    color: var(--white);
-    margin-bottom: 24px;
+    font-family: var(--font-head);
+    font-size: clamp(34px, 4.6vw, 54px);
+    font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.18; color: var(--charcoal); margin-bottom: 22px;
   }
-  .hero-headline .gold-word { color: var(--gold); }
+  .trust-word {
+    position: relative; color: var(--bronze); white-space: nowrap;
+  }
+  .trust-underline-svg { position: absolute; left: 0; bottom: -8px; width: 100%; height: 10px; overflow: visible; }
+  .trust-underline-path {
+    stroke-dasharray: 6 6;
+    animation: trustMarch 1.6s linear infinite;
+  }
+  @keyframes trustMarch { to { stroke-dashoffset: -24; } }
   .hero-sub {
-    font-size: 17px; line-height: 1.75;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 40px;
-    max-width: 560px;
+    font-size: 17px; line-height: 1.75; color: var(--text-muted);
+    margin-bottom: 14px; max-width: 540px;
+  }
+  .hero-subline-tags {
+    font-size: 12.5px; font-weight: 600; color: var(--bronze-dark);
+    letter-spacing: 0.05em; margin-bottom: 38px;
+    text-transform: uppercase;
   }
   .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
-    background: var(--gold); color: var(--navy);
-    padding: 14px 32px; border-radius: 7px;
-    font-size: 14px; font-weight: 700;
-    text-decoration: none; letter-spacing: 0.03em;
-    transition: all var(--transition);
+    background: var(--charcoal); color: var(--cream);
+    padding: 15px 32px; border-radius: 9px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    letter-spacing: 0.02em; transition: all var(--transition);
     display: inline-flex; align-items: center; gap: 8px;
-    border: none; cursor: pointer;
+    border: none; cursor: pointer; position: relative; overflow: hidden;
   }
   .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(201,168,76,0.4);
+    background: var(--bronze); transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(143,94,42,0.32);
   }
   .btn-primary svg { transition: transform var(--transition); }
   .btn-primary:hover svg { transform: translateX(3px); }
   .btn-secondary {
-    background: transparent; color: var(--white);
-    padding: 14px 32px; border-radius: 7px;
-    font-size: 14px; font-weight: 500;
-    text-decoration: none; letter-spacing: 0.03em;
-    border: 1px solid rgba(255,255,255,0.25);
+    background: transparent; color: var(--charcoal);
+    padding: 15px 32px; border-radius: 9px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    letter-spacing: 0.02em; border: 1.5px solid var(--border);
     transition: all var(--transition);
     display: inline-flex; align-items: center; gap: 8px;
   }
   .btn-secondary:hover {
-    border-color: rgba(201,168,76,0.6);
-    color: var(--gold);
-    background: rgba(201,168,76,0.07);
+    border-color: var(--bronze); color: var(--bronze-dark);
+    background: rgba(143,94,42,0.06);
   }
   .hero-stats {
-    display: flex; gap: 48px;
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    position: relative; z-index: 2;
+    display: flex; gap: 48px; margin-top: 56px; padding-top: 36px;
+    border-top: 1px solid var(--olive-line); position: relative; z-index: 2;
   }
-  .hero-stat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px; font-weight: 700; color: var(--gold);
-    line-height: 1;
-  }
-  .hero-stat-label {
-    font-size: 12px; color: rgba(255,255,255,0.5);
-    margin-top: 4px; letter-spacing: 0.04em;
-  }
+  .hero-stat-value { font-family: var(--font-head); font-size: 34px; font-weight: 800; color: var(--bronze); line-height: 1; }
+  .hero-stat-label { font-size: 11.5px; color: var(--text-muted); margin-top: 5px; letter-spacing: 0.03em; }
+
   .hero-right {
-    position: absolute; right: 5%; top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    display: flex; flex-direction: column; gap: 16px;
+    position: absolute; right: 5%; top: 56%; transform: translateY(-50%);
+    z-index: 2; display: flex; flex-direction: column; gap: 16px;
     animation: heroFadeUp 0.9s ease-out 0.3s both;
   }
-  .hero-card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 12px;
-    padding: 20px 24px;
-    width: 240px;
-    transition: var(--transition);
+  @keyframes cardFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%      { transform: translateY(-7px); }
   }
+  .hero-card {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--olive-line);
+    border-radius: 13px; padding: 18px 22px; width: 230px;
+    transition: var(--transition);
+    animation: cardFloat 5s ease-in-out infinite;
+  }
+  .hero-card:nth-of-type(1) { animation-delay: 0s; }
+  .hero-card:nth-of-type(2) { animation-delay: 0.6s; }
+  .hero-card:nth-of-type(3) { animation-delay: 1.2s; }
   .hero-card:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(201,168,76,0.4);
-    transform: translateX(-4px);
+    background: rgba(255,255,255,0.78);
+    border-color: var(--bronze);
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-md);
+    animation-play-state: paused;
   }
   .hero-card-icon {
-    width: 36px; height: 36px;
-    background: rgba(201,168,76,0.15);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 10px;
+    width: 34px; height: 34px; background: var(--bronze-pale);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 9px; color: var(--bronze-dark); transition: var(--transition);
   }
-  .hero-card-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
-  .hero-card-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .hero-card:hover .hero-card-icon { transform: scale(1.12) rotate(-4deg); background: var(--bronze); color: var(--cream); }
+  .hero-card-title { font-size: 12.5px; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+  .hero-card-sub { font-size: 10.5px; color: var(--text-muted); }
   .icai-badge {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 10px;
-    padding: 16px 20px;
-    display: flex; align-items: center; gap: 12px;
-    width: 240px;
+    background: rgba(255,255,255,0.55); backdrop-filter: blur(6px);
+    border: 1px solid var(--olive-line); border-radius: 11px;
+    padding: 15px 18px; display: flex; align-items: center; gap: 12px; width: 230px;
+    transition: var(--transition); cursor: default;
   }
-  .icai-emblem {
-    width: 42px; height: 42px; flex-shrink: 0;
-  }
-  .icai-text { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4; }
-  .icai-text strong { color: var(--gold); font-weight: 600; font-size: 12px; display: block; }
+  .icai-badge:hover { border-color: var(--bronze); background: rgba(255,255,255,0.78); transform: translateX(-5px); box-shadow: var(--shadow-md); }
+  .icai-badge:hover svg { transform: rotate(8deg) scale(1.06); transition: var(--transition); }
+  .icai-text { font-size: 10.5px; color: var(--text-muted); line-height: 1.4; }
+  .icai-text strong { color: var(--bronze-dark); font-weight: 700; font-size: 11.5px; display: block; }
 
   /* ── SECTION BASE ── */
-  section { padding: 100px 5%; }
+  section {
+    padding: 104px 5%; position: relative;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    animation: gridDrift 11s linear infinite;
+  }
+  #Our-Values {
+    background-image:
+      linear-gradient(rgba(237,233,220,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,233,220,0.08) 1px, transparent 1px);
+  }
   .section-label {
-    font-size: 11px; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.14em;
-    text-transform: uppercase; margin-bottom: 12px;
+    font-size: 11px; font-weight: 700; color: var(--bronze);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px;
     display: flex; align-items: center; gap: 10px;
   }
-  .section-label::before {
-    content: ''; width: 24px; height: 2px; background: var(--gold);
-  }
+  .section-label::before { content: ''; width: 26px; height: 2px; background: var(--bronze); border-radius: 2px; }
   .section-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 700; line-height: 1.2; color: var(--navy);
+    font-family: var(--font-head); font-size: clamp(28px, 3.6vw, 40px);
+    font-weight: 700; letter-spacing: -0.015em; line-height: 1.22; color: var(--charcoal);
   }
-  .section-sub {
-    font-size: 16px; color: var(--text-muted);
-    max-width: 560px; margin-top: 14px; line-height: 1.75;
-  }
-  .section-header { margin-bottom: 60px; }
+  .section-sub { font-size: 15.5px; color: var(--text-muted); max-width: 560px; margin-top: 15px; line-height: 1.75; }
+  .section-header { margin-bottom: 58px; }
 
   /* ── TRUST BAR ── */
-  #trust-bar {
-    background: var(--off-white);
-    padding: 28px 5%;
-    border-top: 1px solid var(--gray-200);
-    border-bottom: 1px solid var(--gray-200);
-  }
-  .trust-inner {
-    display: flex; align-items: center;
-    justify-content: space-between; gap: 32px;
-    flex-wrap: wrap;
-  }
-  .trust-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13px; font-weight: 500; color: var(--gray-600);
-    transition: var(--transition);
-  }
-  .trust-item:hover { color: var(--navy); }
-  .trust-item svg { color: var(--gold); flex-shrink: 0; }
-  .trust-divider { width: 1px; height: 32px; background: var(--gray-200); }
+  #trust-bar { background-color: var(--sand-soft); padding: 26px 5%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
+  .trust-item:hover { color: var(--bronze-dark); transform: translateY(-1px); }
+  .trust-item svg { color: var(--bronze); flex-shrink: 0; transition: var(--transition); }
+  .trust-item:hover svg { color: var(--bronze-dark); transform: scale(1.18) rotate(-6deg); }
+  .trust-divider { width: 1px; height: 28px; background: var(--border); }
 
   /* ── ABOUT ── */
-  #about { background: var(--white); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-  }
-  .about-visual {
-    position: relative;
-  }
+  #about { background-color: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 76px; align-items: center; }
   .about-main-card {
-    background: var(--navy);
-    border-radius: 16px;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
+    background: var(--charcoal); border-radius: 18px; padding: 38px;
+    position: relative; overflow: hidden;
   }
   .about-card-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 80% 15%, rgba(185,122,69,0.18) 0%, transparent 60%);
     pointer-events: none;
   }
   .about-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; line-height: 1.5;
-    color: var(--white); font-style: italic;
-    position: relative; z-index: 1;
-    margin-bottom: 24px;
+    font-family: var(--font-head); font-size: 21px; font-weight: 600;
+    line-height: 1.5; color: var(--cream); position: relative; z-index: 1; margin-bottom: 22px;
   }
   .about-quote::before {
-    content: '"'; font-size: 64px; line-height: 0.8;
-    color: var(--gold); opacity: 0.4;
-    display: block; margin-bottom: 8px;
+    content: '"'; font-size: 58px; line-height: 0.7; color: var(--bronze-light);
+    opacity: 0.55; display: block; margin-bottom: 6px; font-family: Georgia, serif;
   }
-  .about-quote-attr {
-    font-size: 13px; color: var(--gold);
-    font-style: normal; font-weight: 500;
-    letter-spacing: 0.04em;
-    position: relative; z-index: 1;
-  }
-  .about-stat-cards {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px; margin-top: 16px;
-  }
-  .about-stat-card {
-    background: var(--white); border-radius: 10px;
-    padding: 16px 20px;
-    transition: var(--transition);
-  }
-  .about-stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .about-stat-card .val {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; font-weight: 700; color: var(--navy);
-    line-height: 1;
-  }
-  .about-stat-card .lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-  .about-content {}
-  .about-content p {
-    font-size: 15.5px; color: var(--text-muted); line-height: 1.8;
-    margin-bottom: 20px;
-  }
-  .about-pillars {
-    display: flex; flex-direction: column; gap: 14px;
-    margin-top: 28px;
-  }
+  .about-quote-attr { font-size: 12.5px; color: var(--bronze-light); font-weight: 600; letter-spacing: 0.03em; position: relative; z-index: 1; }
+  .about-stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .about-stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 17px 20px; transition: var(--transition); }
+  .about-stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--bronze); }
+  .about-stat-card .val { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--charcoal); line-height: 1; }
+  .about-stat-card .lbl { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+  .about-content p { font-size: 15.5px; color: var(--text-muted); line-height: 1.8; margin-bottom: 18px; }
+  .about-pillars { display: flex; flex-direction: column; gap: 13px; margin-top: 26px; }
   .pillar {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 16px; border-radius: 10px;
-    border: 1px solid var(--gray-200);
-    transition: var(--transition);
+    display: flex; align-items: flex-start; gap: 14px; padding: 16px;
+    border-radius: 12px; border: 1px solid var(--border); transition: var(--transition);
+    background: var(--white);
   }
-  .pillar:hover {
-    border-color: var(--gold);
-    background: var(--gold-pale);
-    transform: translateX(4px);
-  }
+  .pillar:hover { border-color: var(--bronze); background: var(--bronze-pale); transform: translateX(5px); }
   .pillar-icon {
-    width: 36px; height: 36px; border-radius: 8px;
-    background: var(--gold-pale);
+    width: 36px; height: 36px; border-radius: 9px; background: var(--bronze-pale);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: var(--transition); color: var(--bronze-dark);
+  }
+  .pillar:hover .pillar-icon { background: var(--bronze); color: var(--white); }
+  .pillar-text h4 { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 3px; }
+  .pillar-text p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── LEADERSHIP ── */
+  #leadership { background-color: var(--sand-soft); }
+  .leadership-grid { display: grid; grid-template-columns: 230px 1fr; gap: 48px; align-items: center; }
+  .leader-avatar {
+    width: 230px; height: 230px; border-radius: 20px;
+    background: linear-gradient(150deg, var(--charcoal) 0%, var(--charcoal-soft) 100%);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    position: relative; overflow: hidden; box-shadow: var(--shadow-md);
+  }
+  .leader-avatar::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 20%, rgba(185,122,69,0.3), transparent 60%);
+  }
+  .leader-initial { font-family: var(--font-head); font-size: 76px; font-weight: 800; color: var(--bronze-light); position: relative; z-index: 1; }
+  .leader-info-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 34px 36px;
+  }
+  .leader-name { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+  .leader-title { font-size: 13px; color: var(--bronze-dark); font-weight: 600; letter-spacing: 0.03em; margin-bottom: 18px; }
+  .leader-bio { font-size: 14.5px; color: var(--text-muted); line-height: 1.8; margin-bottom: 18px; }
+  .leader-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+  .leader-tag {
+    font-size: 11.5px; font-weight: 600; color: var(--bronze-dark);
+    background: var(--bronze-pale); padding: 6px 14px; border-radius: 100px;
     transition: var(--transition);
   }
-  .pillar:hover .pillar-icon { background: var(--gold); }
-  .pillar:hover .pillar-icon svg { color: var(--navy); }
-  .pillar-icon svg { color: var(--gold); transition: var(--transition); }
-  .pillar-text h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
-  .pillar-text p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .leader-tag:hover { background: var(--bronze); color: var(--white); transform: translateY(-2px); }
 
   /* ── SERVICES ── */
-  #services { background: var(--gray-50); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
+  #services { background-color: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .service-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 14px;
-    padding: 28px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all var(--transition);
-    group: true;
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px; cursor: pointer; position: relative; overflow: hidden;
+    transition: transform 0.15s ease-out, box-shadow var(--transition), border-color var(--transition);
+    transform-style: preserve-3d; will-change: transform;
   }
   .service-card::before {
-    content: '';
-    position: absolute; bottom: 0; left: 0;
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--bronze) 0%, var(--bronze-light) 100%);
+    transform: scaleX(0); transform-origin: left; transition: transform var(--transition);
   }
   .service-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(201,168,76,0.4);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.09);
+    border-color: var(--bronze); box-shadow: var(--shadow-lg);
   }
   .service-card:hover::before { transform: scaleX(1); }
   .service-icon-wrap {
-    width: 52px; height: 52px;
-    border-radius: 12px;
-    background: var(--gray-50);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
+    width: 52px; height: 52px; border-radius: 13px; background: var(--sand-soft);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    transition: all var(--transition); position: relative; overflow: hidden; color: var(--bronze);
   }
   .service-icon-wrap::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--gold);
-    transform: scale(0);
-    border-radius: 12px;
-    transition: transform var(--transition);
-    z-index: 0;
+    content: ''; position: absolute; inset: 0; background: var(--bronze);
+    transform: scale(0); border-radius: 13px; transition: transform var(--transition); z-index: 0;
   }
   .service-card:hover .service-icon-wrap::after { transform: scale(1); }
-  .service-icon-wrap svg {
-    position: relative; z-index: 1;
-    color: var(--gold);
-    transition: var(--transition);
-  }
-  .service-card:hover .service-icon-wrap svg { color: var(--navy); }
-  .service-card h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-  .service-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .service-icon-wrap svg { position: relative; z-index: 1; transition: var(--transition); }
+  .service-card:hover .service-icon-wrap svg { color: var(--white); }
+  .service-card h3 { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; letter-spacing: -0.005em; }
+  .service-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
   .service-arrow {
-    position: absolute; top: 24px; right: 24px;
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--gray-100);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-    opacity: 0;
+    position: absolute; top: 24px; right: 24px; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--sand-soft); display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition); opacity: 0; color: var(--charcoal);
   }
-  .service-card:hover .service-arrow {
-    opacity: 1;
-    background: var(--gold);
-    transform: rotate(45deg);
-  }
-  .service-arrow svg { color: var(--navy); }
+  .service-card:hover .service-arrow { opacity: 1; background: var(--bronze); color: var(--white); transform: rotate(45deg); }
 
   /* ── INDUSTRIES ── */
-  #industries { background: var(--white); }
-  .industries-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-  }
+  #industries { background-color: var(--sand-soft); }
+  .industries-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
   .industry-item {
-    border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    padding: 22px 16px;
-    text-align: center;
-    cursor: default;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--border); border-radius: 13px; padding: 22px 16px; text-align: center;
+    cursor: default; transition: all var(--transition); position: relative; overflow: hidden;
+    background: var(--white);
   }
   .industry-item::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--navy);
-    transform: translateY(100%);
-    transition: transform var(--transition);
-    z-index: 0;
+    content: ''; position: absolute; inset: 0; background: var(--charcoal);
+    transform: translateY(100%); transition: transform var(--transition); z-index: 0;
   }
-  .industry-item:hover { border-color: var(--navy); transform: translateY(-3px); }
+  .industry-item:hover { border-color: var(--bronze); transform: translateY(-4px); box-shadow: var(--shadow-md); }
   .industry-item:hover::before { transform: translateY(0); }
   .industry-icon-bg {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    background: var(--gray-50);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px;
-    transition: var(--transition);
+    width: 48px; height: 48px; border-radius: 13px; background: var(--sand-soft);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+    transition: var(--transition); position: relative; z-index: 1; color: var(--charcoal);
+  }
+  .industry-item:hover .industry-icon-bg { background: rgba(185,122,69,0.25); color: var(--bronze-light); }
+  .industry-name { font-size: 13px; font-weight: 600; color: var(--charcoal); line-height: 1.4; position: relative; z-index: 1; transition: var(--transition); }
+  .industry-item:hover .industry-name { color: var(--cream); }
+
+  /* ── OUR VALUES (Why Us) ── */
+  #Our-Values { background-color: var(--charcoal); position: relative; overflow: hidden; }
+  .why-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 700px 500px at 80% 50%, rgba(185,122,69,0.12) 0%, transparent 70%); }
+  #Our-Values .section-heading { color: var(--cream); }
+  #Our-Values .section-sub { color: var(--text-on-dark-muted); }
+  #Our-Values .section-label { color: var(--bronze-light); }
+  #Our-Values .section-label::before { background: var(--bronze-light); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+  .why-card {
+    border: 1px solid rgba(185,122,69,0.22); border-radius: 16px; padding: 32px 28px;
+    position: relative; overflow: hidden; transition: all var(--transition); cursor: default;
+    background: var(--charcoal-soft);
+  }
+  .why-card-glow {
+    position: absolute; width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(185,122,69,0.22) 0%, transparent 70%);
+    pointer-events: none; opacity: 0; transition: opacity var(--transition);
+    left: 0; top: 0; transform: translate(-50%,-50%);
+  }
+  .why-card:hover .why-card-glow { opacity: 1; }
+  .why-card:hover { border-color: rgba(185,122,69,0.5); transform: translateY(-4px); }
+  .why-number {
+    font-family: var(--font-head); font-size: 50px; font-weight: 800;
+    color: rgba(185,122,69,0.18); line-height: 1; margin-bottom: 16px; transition: var(--transition);
     position: relative; z-index: 1;
   }
-  .industry-item:hover .industry-icon-bg { background: rgba(201,168,76,0.2); }
-  .industry-icon-bg svg { color: var(--navy); transition: var(--transition); }
-  .industry-item:hover .industry-icon-bg svg { color: var(--gold); }
-  .industry-name {
-    font-size: 13px; font-weight: 500; color: var(--navy);
-    line-height: 1.4; position: relative; z-index: 1;
-    transition: var(--transition);
-  }
-  .industry-item:hover .industry-name { color: var(--white); }
-
-  /* ── Our Values ── */
-  #Our-Values {
-    background: var(--navy);
-    position: relative; overflow: hidden;
-  }
-  .why-bg {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 700px 500px at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
-  }
-  .Our-Values .section-heading { color: var(--white); }
-  .Our-Values .section-sub { color: rgba(255,255,255,0.55); }
-  .Our-Values .section-label { color: var(--gold); }
-  .why-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
-  }
-  .why-card {
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 14px;
-    padding: 32px 28px;
-    position: relative;
-    overflow: hidden;
-    transition: all var(--transition);
-    cursor: default;
-  }
-  .why-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(201,168,76,0.05);
-    opacity: 0;
-    transition: var(--transition);
-  }
-  .why-card:hover {
-    border-color: rgba(201,168,76,0.5);
-    transform: translateY(-4px);
-  }
-  .why-card:hover::after { opacity: 1; }
-  .why-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px; font-weight: 700;
-    color: rgba(201,168,76,0.15);
-    line-height: 1;
-    margin-bottom: 16px;
-    transition: var(--transition);
-  }
-  .why-card:hover .why-number { color: rgba(201,168,76,0.3); }
+  .why-card:hover .why-number { color: rgba(185,122,69,0.38); }
   .why-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: rgba(201,168,76,0.1);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px;
-    transition: var(--transition);
+    width: 44px; height: 44px; border-radius: 11px; background: rgba(185,122,69,0.14);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    transition: var(--transition); color: var(--bronze-light); position: relative; z-index: 1;
   }
-  .why-card:hover .why-icon { background: rgba(201,168,76,0.2); }
-  .why-icon svg { color: var(--gold); }
-  .why-card h3 { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
-  .why-card p { font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+  .why-card:hover .why-icon { background: rgba(185,122,69,0.28); }
+  .why-card h3 { font-size: 16px; font-weight: 700; color: var(--cream); margin-bottom: 10px; position: relative; z-index: 1; }
+  .why-card p { font-size: 13.5px; color: var(--text-on-dark-muted); line-height: 1.65; position: relative; z-index: 1; }
 
   /* ── PROCESS ── */
-  #process { background: var(--off-white); }
-  .process-steps {
-    display: grid; grid-template-columns: repeat(4,1fr);
-    gap: 0;
-    position: relative;
-  }
+  #process { background-color: var(--cream); }
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
   .process-steps::before {
-    content: '';
-    position: absolute;
-    top: 32px; left: calc(12.5% + 24px);
-    right: calc(12.5% + 24px);
-    height: 1px;
-    background: linear-gradient(90deg, var(--gold) 0%, rgba(201,168,76,0.2) 100%);
-    z-index: 0;
+    content: ''; position: absolute; top: 32px; left: calc(12.5% + 24px); right: calc(12.5% + 24px);
+    height: 1px; background: linear-gradient(90deg, var(--bronze) 0%, var(--olive-line) 100%); z-index: 0;
   }
-  .process-step {
-    text-align: center;
-    padding: 0 16px;
-    position: relative; z-index: 1;
-    transition: var(--transition);
-  }
-  .process-step:hover { transform: translateY(-4px); }
+  .process-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; transition: var(--transition); }
+  .process-step:hover { transform: translateY(-5px); }
   .step-num {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 2px solid var(--gray-200);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700; color: var(--navy);
-    transition: all var(--transition);
+    width: 64px; height: 64px; border-radius: 50%; background: var(--white);
+    border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px; font-family: var(--font-head); font-size: 22px; font-weight: 800;
+    color: var(--charcoal); transition: all var(--transition);
   }
-  .process-step:hover .step-num {
-    border-color: var(--gold);
-    background: var(--navy);
-    color: var(--gold);
-    box-shadow: 0 0 0 6px rgba(201,168,76,0.1);
-  }
-  .process-step h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .process-step:hover .step-num { border-color: var(--bronze); background: var(--charcoal); color: var(--bronze-light); box-shadow: 0 0 0 7px rgba(143,94,42,0.1); }
+  .process-step h4 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; }
   .process-step p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
+  /* ── COMPLIANCE CALENDAR ── */
+  #calendar { background-color: var(--sand-soft); }
+  .calendar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .cal-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px; transition: all var(--transition); position: relative; overflow: hidden;
+  }
+  .cal-card:hover { border-color: var(--bronze); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .cal-date-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 52px; height: 52px; border-radius: 12px; background: var(--bronze-pale);
+    color: var(--bronze-dark); font-family: var(--font-head); font-weight: 800; font-size: 18px;
+    margin-bottom: 14px; transition: var(--transition); padding: 0 8px;
+  }
+  .cal-card:hover .cal-date-badge { background: var(--bronze); color: var(--white); }
+  .cal-title { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; }
+  .cal-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+  .calendar-note {
+    margin-top: 28px; font-size: 12px; color: var(--text-faint); text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  /* ── FAQ ── */
+  #faq { background-color: var(--sand-soft); }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+  .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 13px; overflow: hidden; transition: border-color var(--transition); }
+  .faq-item.open, .faq-item:hover { border-color: var(--bronze); }
+  .faq-question {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 24px; cursor: pointer; user-select: none;
+  }
+  .faq-question span { font-size: 14.5px; font-weight: 700; color: var(--charcoal); }
+  .faq-chevron { flex-shrink: 0; color: var(--bronze); transition: transform var(--transition), color var(--transition); }
+  .faq-question:hover .faq-chevron { transform: scale(1.18); color: var(--bronze-dark); }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-item.open .faq-question:hover .faq-chevron { transform: rotate(180deg) scale(1.18); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height var(--transition-slow); }
+  .faq-answer-inner { padding: 0 24px 22px; font-size: 13.5px; color: var(--text-muted); line-height: 1.75; }
+
+  /* ── NEWS / UPDATES ── */
+  #updates { background-color: var(--cream); }
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; }
+  .news-col-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--bronze); }
+  .news-col-title { font-size: 11.5px; font-weight: 700; color: var(--charcoal); letter-spacing: 0.08em; text-transform: uppercase; }
+  .news-item { display: block; padding: 12px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all var(--transition); }
+  .news-item:hover { padding-left: 6px; background: linear-gradient(90deg, var(--bronze-pale), transparent 60%); }
+  .news-item:last-child { border-bottom: none; }
+  .news-date { font-size: 10.5px; color: var(--bronze); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.02em; }
+  .news-title { font-size: 13px; font-weight: 500; color: var(--charcoal); line-height: 1.5; transition: var(--transition); }
+  .news-item:hover .news-title { color: var(--bronze-dark); }
+  .news-loading, .news-error { font-size: 12.5px; color: var(--text-faint); padding: 12px 0; }
+  .news-feed-credit { font-size: 10px; color: var(--text-faint); margin-top: 10px; text-align: right; letter-spacing: 0.02em; }
+  .news-source-credit { text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-faint); }
+  .news-source-credit a { color: var(--bronze); text-decoration: none; font-weight: 600; }
+  .news-source-credit a:hover { text-decoration: underline; }
+
+  /* ── QUICK RESOURCES ── */
+  #resources { background-color: var(--sand-soft); }
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .resource-link {
+    display: flex; align-items: center; gap: 14px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 13px; padding: 18px 20px;
+    text-decoration: none; transition: all var(--transition);
+  }
+  .resource-link:hover { border-color: var(--bronze); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .resource-icon {
+    width: 42px; height: 42px; border-radius: 10px; background: var(--bronze-pale);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    color: var(--bronze-dark); transition: var(--transition);
+  }
+  .resource-link:hover .resource-icon { background: var(--bronze); color: var(--white); }
+  .resource-text-title { font-size: 13.5px; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+  .resource-text-sub { font-size: 11.5px; color: var(--text-faint); }
+  .resource-external { margin-left: auto; color: var(--text-faint); transition: var(--transition); flex-shrink: 0; }
+  .resource-link:hover .resource-external { color: var(--bronze); transform: translate(2px,-2px); }
+
   /* ── CONTACT ── */
-  #contact { background: var(--white); }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 60px; align-items: start;
-  }
-  .contact-info {}
-  .contact-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 700; color: var(--navy);
-    margin-bottom: 16px;
-  }
-  .contact-sub {
-    font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 36px;
-  }
-  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  #contact { background-color: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
+  .contact-details { display: flex; flex-direction: column; gap: 14px; }
   .contact-detail-item {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 16px; border-radius: 10px;
-    border: 1px solid var(--gray-200);
-    transition: all var(--transition);
-    cursor: default;
+    display: flex; align-items: flex-start; gap: 16px; padding: 16px;
+    border-radius: 12px; border: 1px solid var(--border); transition: all var(--transition);
+    cursor: default; background: var(--white);
   }
-  .contact-detail-item:hover {
-    border-color: var(--gold);
-    background: var(--gold-pale);
-    transform: translateX(4px);
-  }
+  .contact-detail-item:hover { border-color: var(--bronze); background: var(--bronze-pale); transform: translateX(4px); }
   .contact-detail-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: var(--gray-50);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: var(--transition);
+    width: 40px; height: 40px; border-radius: 11px; background: var(--sand-soft);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: var(--transition); color: var(--bronze);
   }
-  .contact-detail-item:hover .contact-detail-icon { background: var(--gold); }
-  .contact-detail-icon svg { color: var(--gold); transition: var(--transition); }
-  .contact-detail-item:hover .contact-detail-icon svg { color: var(--navy); }
-  .contact-detail-text .label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; margin-bottom: 2px; text-transform: uppercase; }
-  .contact-detail-text .value { font-size: 14px; font-weight: 500; color: var(--navy); }
+  .contact-detail-item:hover .contact-detail-icon { background: var(--bronze); color: var(--white); }
+  .contact-detail-text .label { font-size: 10.5px; color: var(--text-faint); letter-spacing: 0.06em; margin-bottom: 2px; text-transform: uppercase; font-weight: 600; }
+  .contact-detail-text .value { font-size: 14px; font-weight: 700; color: var(--charcoal); }
   .icai-membership {
-    margin-top: 28px; padding: 18px;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent);
-    display: flex; align-items: center; gap: 14px;
+    margin-top: 22px; padding: 18px; border: 1px solid var(--olive-line); border-radius: 13px;
+    background: linear-gradient(135deg, var(--bronze-pale), transparent); display: flex; align-items: center; gap: 14px;
   }
-  .icai-logo-full { flex-shrink: 0; }
-  .icai-membership-text .t1 { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .icai-membership-text .t1 { font-size: 12px; font-weight: 700; color: var(--charcoal); }
   .icai-membership-text .t2 { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-  /* FORM */
-  .contact-form-wrap {
-    background: var(--gray-50);
-    border-radius: 16px;
-    padding: 36px;
-    border: 1px solid var(--gray-200);
-  }
-  .form-title { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .contact-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 36px; box-shadow: var(--shadow-sm); }
+  .form-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
   .form-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block; font-size: 12px; font-weight: 600;
-    color: var(--gray-600); margin-bottom: 6px;
-    letter-spacing: 0.04em; text-transform: uppercase;
+  .form-group label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 7px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 9px;
+    font-size: 14px; font-family: var(--font-body); color: var(--text); background: var(--cream);
+    outline: none; transition: all var(--transition); appearance: none;
   }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%; padding: 12px 14px;
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    font-size: 14px; font-family: 'Inter', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    outline: none;
-    transition: all var(--transition);
-    appearance: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--bronze); background: var(--white); box-shadow: 0 0 0 3px rgba(143,94,42,0.12);
   }
   .form-group textarea { resize: vertical; min-height: 110px; }
   .form-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239e9c98' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 38px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2374684A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
   }
   .form-submit {
-    width: 100%;
-    background: var(--navy); color: var(--white);
-    padding: 15px 28px; border-radius: 8px;
-    font-size: 14.5px; font-weight: 600;
-    letter-spacing: 0.03em; cursor: pointer;
-    border: none;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: all var(--transition);
+    width: 100%; background: var(--charcoal); color: var(--cream); padding: 15px 28px;
+    border-radius: 10px; font-size: 14.5px; font-weight: 700; letter-spacing: 0.02em;
+    cursor: pointer; border: none; display: flex; align-items: center; justify-content: center;
+    gap: 10px; transition: all var(--transition);
   }
-  .form-submit:hover {
-    background: var(--gold); color: var(--navy);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(201,168,76,0.35);
-  }
+  .form-submit:hover { background: var(--bronze); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(143,94,42,0.3); }
   .form-submit svg { transition: transform var(--transition); }
   .form-submit:hover svg { transform: translateX(3px); }
-  .form-note { font-size: 11.5px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+  .form-note { font-size: 11px; color: var(--text-faint); text-align: center; margin-top: 12px; }
+  .form-success { background: var(--bronze-pale); border: 1px solid var(--olive-line); border-radius: 12px; padding: 32px; text-align: center; display: none; }
+  .form-success.show { display: block; }
+  .form-success h4 { font-family: var(--font-head); color: var(--charcoal); font-size: 16px; margin-bottom: 8px; }
+  .form-success p { font-size: 13px; color: var(--text-muted); }
 
   /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    padding: 70px 5% 28px;
-    position: relative; overflow: hidden;
-  }
-  .footer-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 600px 400px at 80% 0%, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px; padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    position: relative; z-index: 1;
-  }
-  .footer-brand-col {}
-  .footer-logo {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
-  }
+  footer { background: var(--charcoal); padding: 64px 5% 0; position: relative; overflow: hidden; }
+  .footer-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 600px 400px at 80% 0%, rgba(185,122,69,0.10) 0%, transparent 70%); pointer-events: none; }
+  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 44px; padding-bottom: 44px; border-bottom: 1px solid rgba(237,233,220,0.08); position: relative; z-index: 1; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
   .footer-logo-mark {
-    width: 40px; height: 40px; border-radius: 8px;
-    background: linear-gradient(135deg, var(--gold) 0%, #e8c96a 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 16px; font-weight: 700; color: var(--navy);
+    width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-light) 100%);
+    display: flex; align-items: center; justify-content: center; font-family: var(--font-head);
+    font-size: 16px; font-weight: 800; color: var(--cream);
   }
-  .footer-firm-name { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.3; }
-  .footer-firm-type { font-size: 11px; color: var(--gold); letter-spacing: 0.06em; }
-  .footer-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 280px; margin-bottom: 20px; }
+  .footer-firm-name { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--cream); line-height: 1.3; }
+  .footer-firm-type { font-size: 10.5px; color: var(--bronze-light); letter-spacing: 0.07em; text-transform: uppercase; }
+  .footer-desc { font-size: 13px; color: var(--text-on-dark-muted); line-height: 1.75; max-width: 280px; margin-bottom: 20px; }
   .footer-social { display: flex; gap: 10px; }
   .social-btn {
-    width: 36px; height: 36px; border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
+    width: 36px; height: 36px; border-radius: 9px; border: 1px solid rgba(237,233,220,0.12);
+    display: flex; align-items: center; justify-content: center; transition: all var(--transition);
     cursor: pointer; text-decoration: none;
   }
-  .social-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
-  .social-btn svg { color: rgba(255,255,255,0.6); transition: var(--transition); }
-  .social-btn:hover svg { color: var(--gold); }
-  .footer-col-title { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
+  .social-btn:hover { border-color: var(--bronze-light); background: rgba(185,122,69,0.15); transform: translateY(-2px); }
+  .social-btn svg { color: var(--text-on-dark-muted); transition: var(--transition); }
+  .social-btn:hover svg { color: var(--bronze-light); }
+  .footer-col-title { font-size: 11.5px; font-weight: 700; color: var(--bronze-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
   .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-links a {
-    font-size: 13px; color: rgba(255,255,255,0.45);
-    text-decoration: none; transition: var(--transition);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .footer-links a:hover { color: var(--gold); padding-left: 4px; }
+  .footer-links a { font-size: 13px; color: var(--text-on-dark-muted); text-decoration: none; transition: var(--transition); display: flex; align-items: center; gap: 6px; }
+  .footer-links a:hover { color: var(--bronze-light); padding-left: 4px; }
   .footer-links a::before { content: '›'; font-size: 14px; transition: var(--transition); }
-  .footer-bottom {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-top: 24px;
-    position: relative; z-index: 1;
-    flex-wrap: wrap; gap: 12px;
+  .footer-contact-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+  .footer-contact-list span { font-size: 12px; color: var(--text-on-dark-muted); display: flex; align-items: center; gap: 7px; }
+  .footer-contact-list svg { color: var(--bronze-light); flex-shrink: 0; }
+
+  /* ── FOOTER MAP ── */
+  .footer-map-wrap {
+    border-radius: 14px; overflow: hidden; border: 1px solid rgba(185,122,69,0.25);
+    position: relative; height: 150px; background: var(--charcoal-soft);
+    transition: var(--transition);
   }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
-  .footer-copy span { color: rgba(201,168,76,0.6); }
-  .footer-disclaimer { font-size: 11px; color: rgba(255,255,255,0.2); text-align: right; max-width: 400px; line-height: 1.5; }
+  .footer-map-wrap:hover { border-color: var(--bronze-light); box-shadow: 0 8px 28px rgba(0,0,0,0.35); }
+  .footer-map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.25) sepia(0.18) contrast(1.02); display: block; }
+  .footer-map-label {
+    position: absolute; bottom: 8px; left: 8px; background: rgba(30,27,17,0.85);
+    backdrop-filter: blur(4px); padding: 5px 10px; border-radius: 7px;
+    font-size: 10.5px; color: var(--cream); font-weight: 600; display: flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(185,122,69,0.3); pointer-events: none;
+  }
+  .footer-map-label svg { color: var(--bronze-light); flex-shrink: 0; }
+
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between; padding: 24px 0;
+    position: relative; z-index: 1; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(237,233,220,0.35); }
+  .footer-copy span { color: var(--bronze-light); }
+  .footer-disclaimer { font-size: 10.5px; color: rgba(237,233,220,0.22); text-align: right; max-width: 400px; line-height: 1.5; }
 
   /* ── WHATSAPP FLOAT ── */
   .whatsapp-float {
-    position: fixed; bottom: 28px; right: 28px;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #25D366;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    z-index: 999;
-    text-decoration: none;
-    transition: all var(--transition);
-    animation: floatIn 0.6s ease-out 1.5s both;
+    position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 999; text-decoration: none;
+    transition: all var(--transition); animation: floatIn 0.6s ease-out 1.5s both;
   }
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
-  }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
   .whatsapp-float::before {
-    content: '';
-    position: absolute; inset: 0; border-radius: 50%;
-    background: #25D366;
-    animation: ripple 2s ease-out infinite;
-    z-index: -1;
+    content: ''; position: absolute; inset: 0; border-radius: 50%; background: #25D366;
+    animation: ripple 2s ease-out infinite; z-index: -1;
   }
-  @keyframes ripple {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(1.7); opacity: 0; }
-  }
-  @keyframes floatIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+  @keyframes ripple { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes floatIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   .whatsapp-float svg { color: var(--white); }
 
-  /* ── ANIMATIONS ── */
-  .fade-up {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+  /* ── SCROLL-TOP BUTTON ── */
+  .scrolltop-btn {
+    position: fixed; bottom: 28px; right: 96px; width: 44px; height: 44px; border-radius: 50%;
+    background: var(--charcoal); border: 1px solid rgba(185,122,69,0.3);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    z-index: 999; transition: all var(--transition); opacity: 0; pointer-events: none;
+    transform: translateY(10px);
   }
+  .scrolltop-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .scrolltop-btn:hover { background: var(--bronze); transform: translateY(-3px); }
+  .scrolltop-btn svg { color: var(--bronze-light); transition: var(--transition); }
+  .scrolltop-btn:hover svg { color: var(--white); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up:nth-child(2) { transition-delay: 0.1s; }
-  .fade-up:nth-child(3) { transition-delay: 0.2s; }
-  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+  .fade-up:nth-child(2) { transition-delay: 0.08s; }
+  .fade-up:nth-child(3) { transition-delay: 0.16s; }
+  .fade-up:nth-child(4) { transition-delay: 0.24s; }
+  .fade-up:nth-child(5) { transition-delay: 0.32s; }
+
+  /* magnetic-ready buttons just need JS; no extra CSS required beyond transition already set */
 
   /* ── MOBILE ── */
   @media (max-width: 1100px) {
     .hero-right { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .leadership-grid { grid-template-columns: 1fr; text-align: center; }
+    .leader-avatar { margin: 0 auto; }
   }
   @media (max-width: 768px) {
     nav { padding: 0 5%; }
-    .nav-links { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0; background: rgba(13,27,42,0.99); padding: 24px; gap: 4px; }
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 76px; left: 0; right: 0; background: rgba(248,245,236,0.99); padding: 24px; gap: 4px; border-bottom: 1px solid var(--border); }
     .nav-links.open { display: flex; }
     .nav-links li { width: 100%; }
-    .nav-links a { padding: 12px 16px; display: block; border-radius: 8px; }
-    .nav-links a:hover { background: rgba(201,168,76,0.1); }
+    .nav-links a { padding: 12px 16px; display: block; border-radius: 9px; }
+    .nav-links a:hover { background: var(--bronze-pale); }
     .nav-links a::after { display: none; }
     .nav-cta { margin-top: 8px; text-align: center; }
     .hamburger { display: flex; }
-    #hero { padding: 100px 5% 60px; }
-    .hero-headline { font-size: 32px; }
-    .hero-stats { gap: 28px; flex-wrap: wrap; }
-    .hero-stat-value { font-size: 28px; }
-    section { padding: 70px 5%; }
-    .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    #hero { padding: 156px 5% 60px; }
+    .hero-headline { font-size: 30px; }
+    .hero-stats { gap: 26px; flex-wrap: wrap; }
+    .hero-stat-value { font-size: 26px; }
+    .orbit-zone { top: 138px; right: 6%; width: 100px; height: 100px; }
+    section { padding: 68px 5%; }
+    .contact-grid { grid-template-columns: 1fr; gap: 34px; }
     .form-row { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; row-gap: 36px; }
     .process-steps::before { display: none; }
-    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .footer-disclaimer { text-align: center; }
     .news-grid { grid-template-columns: 1fr; }
+    .calendar-grid { grid-template-columns: 1fr 1fr; }
+    .scrolltop-btn { right: 84px; }
   }
-
-  /* NEWS SECTION */
-  #updates { background: var(--white); }
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 28px;
-  }
-  .news-col-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 20px; padding-bottom: 12px;
-    border-bottom: 2px solid var(--gold);
-  }
-  .news-col-title {
-    font-size: 12px; font-weight: 700; color: var(--navy);
-    letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .news-item {
-    display: block; padding: 13px 0;
-    border-bottom: 1px solid var(--gray-100);
-    text-decoration: none; transition: all var(--transition);
-  }
-  .news-item:hover { padding-left: 6px; }
-  .news-item:last-child { border-bottom: none; }
-  .news-date { font-size: 11px; color: var(--gold); margin-bottom: 4px; font-weight: 500; }
-  .news-title { font-size: 13.5px; font-weight: 500; color: var(--navy); line-height: 1.5; transition: var(--transition); }
-  .news-item:hover .news-title { color: var(--gold); }
-  .news-loading, .news-error { font-size: 13px; color: var(--gray-400); padding: 12px 0; }
-  .news-feed-credit { font-size: 10.5px; color: var(--gray-400); margin-top: 12px; text-align: right; letter-spacing: 0.03em; }
-  .news-source-credit { text-align: center; margin-top: 40px; font-size: 12px; color: var(--gray-400); }
-  .news-source-credit a { color: var(--gold); text-decoration: none; }
-  .news-source-credit a:hover { text-decoration: underline; }
-
-  /* success state */
-  .form-success {
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 10px; padding: 24px;
-    text-align: center; display: none;
-  }
-  .form-success.show { display: block; }
-  .form-success h4 { color: var(--navy); font-size: 16px; margin-bottom: 6px; }
-  .form-success p { font-size: 13px; color: var(--text-muted); }
-
-  /* top loading bar */
-  .progress-bar {
-    position: fixed; top: 0; left: 0; height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    z-index: 9999; width: 0%;
-    transition: width 0.15s ease;
+  @media (max-width: 480px) {
+    .calendar-grid { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons a { width: 100%; justify-content: center; }
   }
 </style>
 </head>
@@ -995,100 +911,109 @@
       <span class="nav-tagline">Chartered Accountants</span>
     </div>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#industries">Industries</a></li>
-    <li><a href="#updates">Updates</a></li>
-    <li><a href="#Our-Values">Our Values</a></li>
-    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span id="h1"></span><span id="h2"></span><span id="h3"></span>
-  </div>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
 </nav>
 
+<!-- SUB-NAV -->
+<div class="subnav" id="subnav">
+  <div class="subnav-inner">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#industries">Industries</a>
+    <a href="#updates">Updates</a>
+    <a href="#Our-Values">Our Values</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</div>
+
 <!-- HERO -->
+
 <section id="hero">
-  <div class="hero-bg-pattern"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-accent-line"></div>
+  <div class="hero-cursor-glow" id="heroCursorGlow"></div>
+
+  <svg class="hero-flow-line" viewBox="0 0 1000 700" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="flow-path" d="M-30,560 Q220,470 380,510 T720,330 Q780,250 815,195"
+      stroke="#8F5E2A" stroke-width="1.6" fill="none" opacity="0.4"/>
+  </svg>
+
+  <div class="orbit-zone">
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring-inner"></div>
+    <div class="orbit-rotator">
+      <svg class="orbit-calc" viewBox="0 0 38 48" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="36" height="46" rx="6" fill="#2A2517"/>
+        <rect x="6" y="6" width="26" height="11" rx="2" fill="#C7BE9A"/>
+        <rect x="6" y="21" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="16" y="21" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="26" y="21" width="6" height="6" rx="1.3" fill="#B97A45"/>
+        <rect x="6" y="30" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="16" y="30" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="26" y="30" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="6" y="39" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="16" y="39" width="6" height="6" rx="1.3" fill="#74684A"/>
+        <rect x="26" y="39" width="6" height="6" rx="1.3" fill="#74684A"/>
+      </svg>
+    </div>
+    <div class="orbit-dot"></div>
+  </div>
 
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Practicing CA Firm · Delhi NCR
-    </div>
-    <p class="hero-eyebrow">Trusted Since Establishment</p>
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Practicing CA Firm · Delhi NCR</div>
+    <p class="hero-eyebrow">ICAI Registered &middot; Established Practice</p>
     <h1 class="hero-headline">
-      Your Compliance,<br>
-      Our <span class="gold-word">Commitment.</span>
+      Precision that you can
+      <span class="trust-word">trust
+        <svg class="trust-underline-svg" viewBox="0 0 140 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <line class="trust-underline-path" x1="2" y1="5" x2="136" y2="5" stroke="#8F5E2A" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
     </h1>
-    <p class="hero-sub">
-      S Prasad Agarwal &amp; Co. is a full-service chartered accountancy firm offering comprehensive audit, taxation, GST, and corporate compliance solutions — built on decades of professional integrity.
-    </p>
+    <p class="hero-sub">S Prasad Agarwal &amp; Co. is a full-service chartered accountancy firm offering comprehensive audit, taxation, GST, and corporate compliance solutions — built on decades of professional integrity.</p>
+    <p class="hero-subline-tags">Audit &middot; Tax &middot; GST &middot; Compliance</p>
     <div class="hero-buttons">
-      <a href="#services" class="btn-primary">
+      <a href="#services" class="btn-primary magnetic">
         Our Services
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#contact" class="btn-secondary">
-        Free Consultation
+      <a href="#contact" class="btn-secondary magnetic">
+        Get in Touch
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       </a>
     </div>
     <div class="hero-stats">
-      <div>
-        <div class="hero-stat-value">13+</div>
-        <div class="hero-stat-label">Services Offered</div>
-      </div>
-      <div>
-        <div class="hero-stat-value">11</div>
-        <div class="hero-stat-label">Industries Served</div>
-      </div>
-      <div>
-        <div class="hero-stat-value">100%</div>
-        <div class="hero-stat-label">Client Confidentiality</div>
-      </div>
+      <div><div class="hero-stat-value">13+</div><div class="hero-stat-label">Services Offered</div></div>
+      <div><div class="hero-stat-value">11</div><div class="hero-stat-label">Industries Served</div></div>
+      <div><div class="hero-stat-value">100%</div><div class="hero-stat-label">Client Confidentiality</div></div>
     </div>
   </div>
 
   <div class="hero-right">
     <div class="hero-card">
-      <div class="hero-card-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      </div>
+      <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
       <div class="hero-card-title">GST &amp; Compliance</div>
       <div class="hero-card-sub">End-to-end filing &amp; advisory</div>
     </div>
     <div class="hero-card">
-      <div class="hero-card-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
+      <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <div class="hero-card-title">Audit &amp; Assurance</div>
       <div class="hero-card-sub">Statutory, tax &amp; internal</div>
     </div>
     <div class="hero-card">
-      <div class="hero-card-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
+      <div class="hero-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="hero-card-title">Tax Litigation</div>
       <div class="hero-card-sub">IT &amp; GST representation</div>
     </div>
     <div class="icai-badge">
-      <svg class="icai-emblem" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="21" cy="21" r="20" fill="#0D1B2A" stroke="#C9A84C" stroke-width="1.5"/>
-        <circle cx="21" cy="21" r="15" fill="none" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="2 2"/>
-        <text x="21" y="18" text-anchor="middle" fill="#C9A84C" font-size="6.5" font-weight="700" font-family="serif" letter-spacing="0.5">ICAI</text>
-        <path d="M13 21 Q21 16 29 21" stroke="#C9A84C" stroke-width="1" fill="none"/>
-        <path d="M13 24 Q21 19 29 24" stroke="#C9A84C" stroke-width="0.6" fill="none" opacity="0.5"/>
-        <text x="21" y="29" text-anchor="middle" fill="#C9A84C" font-size="4" font-family="serif" letter-spacing="0.3">EST. 1949</text>
-        <circle cx="21" cy="13" r="2.5" fill="#C9A84C" opacity="0.7"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        <circle cx="21" cy="21" r="20" fill="#2A2517" stroke="#B97A45" stroke-width="1.5"/>
+        <circle cx="21" cy="21" r="15" fill="none" stroke="#B97A45" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <text x="21" y="18" text-anchor="middle" fill="#B97A45" font-size="6.5" font-weight="700" font-family="Georgia,serif" letter-spacing="0.5">ICAI</text>
+        <path d="M13 21 Q21 16 29 21" stroke="#B97A45" stroke-width="1" fill="none"/>
+        <text x="21" y="29" text-anchor="middle" fill="#B97A45" font-size="4" font-family="Georgia,serif">EST. 1949</text>
+        <circle cx="21" cy="13" r="2.5" fill="#B97A45" opacity="0.8"/>
       </svg>
-      <div class="icai-text">
-        <strong>ICAI Member</strong>
-        Institute of Chartered Accountants of India
-      </div>
+      <div class="icai-text"><strong>ICAI Member</strong>Institute of Chartered Accountants of India</div>
     </div>
   </div>
 </section>
@@ -1096,61 +1021,32 @@
 <!-- TRUST BAR -->
 <div id="trust-bar">
   <div class="trust-inner">
-    <div class="trust-item">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      ICAI Registered Firm
-    </div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>ICAI Registered Firm</div>
     <div class="trust-divider"></div>
-    <div class="trust-item">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      On-time Compliance
-    </div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>On-time Compliance</div>
     <div class="trust-divider"></div>
-    <div class="trust-item">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      Personalized Attention
-    </div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Personalized Attention</div>
     <div class="trust-divider"></div>
-    <div class="trust-item">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      100% Confidentiality
-    </div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>100% Confidentiality</div>
     <div class="trust-divider"></div>
-    <div class="trust-item">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-      Delhi NCR Based
-    </div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Delhi NCR Based</div>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
-    <div class="about-visual fade-up">
+    <div class="fade-up">
       <div class="about-main-card">
         <div class="about-card-bg"></div>
-        <div class="about-quote">
-          Excellence is not a destination but a continuous journey of professional growth and client service.
-        </div>
+        <div class="about-quote">Excellence is not a destination but a continuous journey of professional growth and client service.</div>
         <div class="about-quote-attr">— S Prasad Agarwal, Founder &amp; Principal Partner</div>
       </div>
       <div class="about-stat-cards">
-        <div class="about-stat-card">
-          <div class="val">13+</div>
-          <div class="lbl">Core Practice Areas</div>
-        </div>
-        <div class="about-stat-card">
-          <div class="val">11</div>
-          <div class="lbl">Industries Served</div>
-        </div>
-        <div class="about-stat-card">
-          <div class="val">Delhi</div>
-          <div class="lbl">NCR Based Practice</div>
-        </div>
-        <div class="about-stat-card">
-          <div class="val">PAN</div>
-          <div class="lbl">India Client Reach</div>
-        </div>
+        <div class="about-stat-card"><div class="val">13+</div><div class="lbl">Core Practice Areas</div></div>
+        <div class="about-stat-card"><div class="val">11</div><div class="lbl">Industries Served</div></div>
+        <div class="about-stat-card"><div class="val">Delhi</div><div class="lbl">NCR Based Practice</div></div>
+        <div class="about-stat-card"><div class="val">PAN</div><div class="lbl">India Client Reach</div></div>
       </div>
     </div>
     <div class="about-content fade-up">
@@ -1160,32 +1056,42 @@
       <p>Our practice is built on the foundational values of integrity, accuracy, and client-first service delivery. We combine deep technical expertise with an understanding of each client's unique business context to deliver compliance solutions that go beyond the statutory minimum.</p>
       <div class="about-pillars">
         <div class="pillar">
-          <div class="pillar-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          </div>
-          <div class="pillar-text">
-            <h4>Integrity First</h4>
-            <p>Every engagement is governed by ICAI's Code of Ethics and our unwavering commitment to professional independence.</p>
-          </div>
+          <div class="pillar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div class="pillar-text"><h4>Integrity First</h4><p>Every engagement is governed by ICAI's Code of Ethics and our unwavering commitment to professional independence.</p></div>
         </div>
         <div class="pillar">
-          <div class="pillar-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="pillar-text">
-            <h4>Deadline-Driven Delivery</h4>
-            <p>We operate with strict timelines to ensure your business never faces penalties due to compliance lapses.</p>
-          </div>
+          <div class="pillar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="pillar-text"><h4>Deadline-Driven Delivery</h4><p>We operate with strict timelines to ensure your business never faces penalties due to compliance lapses.</p></div>
         </div>
         <div class="pillar">
-          <div class="pillar-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="pillar-text">
-            <h4>Partner-Led Attention</h4>
-            <p>Unlike large factory-style firms, every client receives direct partner involvement — not just junior staff.</p>
-          </div>
+          <div class="pillar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="pillar-text"><h4>Partner-Led Attention</h4><p>Unlike large factory-style firms, every client receives direct partner involvement — not just junior staff.</p></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-header">
+    <div class="section-label">Leadership</div>
+    <h2 class="section-heading">Led by Principle, Driven by Expertise</h2>
+    <p class="section-sub">The firm's practice is personally guided by its founding partner, ensuring every engagement carries the same standard of care.</p>
+  </div>
+  <div class="leadership-grid">
+    <div class="leader-avatar fade-up">
+      <div class="leader-initial">SA</div>
+    </div>
+    <div class="leader-info-card fade-up">
+      <div class="leader-name">CA S. Prasad Agarwal</div>
+      <div class="leader-title">Founder &amp; Principal Partner</div>
+      <p class="leader-bio">CA S. Prasad Agarwal founded S Prasad Agarwal &amp; Co. with a vision to provide businesses and individuals across Delhi NCR with reliable, partner-led compliance and advisory services. His approach combines technical rigor with genuine accessibility — every client engagement, regardless of scale, receives his direct attention and oversight.</p>
+      <div class="leader-tags">
+        <span class="leader-tag">Direct &amp; Indirect Taxation</span>
+        <span class="leader-tag">Audit &amp; Assurance</span>
+        <span class="leader-tag">Corporate Compliance</span>
+        <span class="leader-tag">ICAI Member</span>
       </div>
     </div>
   </div>
@@ -1200,122 +1106,31 @@
   </div>
   <div class="services-grid">
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
-      </div>
-      <h3>Income Tax Return Filing</h3>
-      <p>ITR filing for individuals, firms, LLPs, and companies — including HNIs, salaried professionals, and business entities across all ITR forms.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Income Tax Return Filing</h3><p>ITR filing for individuals, firms, LLPs, and companies — including HNIs, salaried professionals, and business entities across all ITR forms.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-      </div>
-      <h3>Accounting &amp; Bookkeeping</h3>
-      <p>Systematic maintenance of books of accounts, preparation of financial statements, and MIS reporting under applicable accounting standards.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><h3>Accounting &amp; Bookkeeping</h3><p>Systematic maintenance of books of accounts, preparation of financial statements, and MIS reporting under applicable accounting standards.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 14l6-6"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="14" r="2"/><path d="M3 3h7v7H3zM14 14h7v7h-7z" opacity="0.4"/><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      </div>
-      <h3>GST Registration &amp; Filing</h3>
-      <p>End-to-end GST services including registration, monthly/quarterly return filing (GSTR-1, 3B), annual returns, and ITC reconciliation.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 14l6-6"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="14" r="2"/><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>GST Registration &amp; Filing</h3><p>End-to-end GST services including registration, monthly/quarterly return filing (GSTR-1, 3B), annual returns, and ITC reconciliation.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      </div>
-      <h3>Tax Audit (u/s 44AB)</h3>
-      <p>Statutory tax audit for businesses and professionals exceeding prescribed turnover limits, including Form 3CA/3CB &amp; 3CD preparation and filing.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3>Tax Audit (u/s 44AB)</h3><p>Statutory tax audit for businesses and professionals exceeding prescribed turnover limits, including Form 3CA/3CB &amp; 3CD preparation and filing.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h5"/></svg>
-      </div>
-      <h3>Statutory Audit</h3>
-      <p>Independent examination of financial statements of companies and entities under the Companies Act and other applicable legislation, ensuring true and fair view.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h5"/></svg></div><h3>Statutory Audit</h3><p>Independent examination of financial statements of companies and entities under the Companies Act and other applicable legislation, ensuring true and fair view.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-      </div>
-      <h3>Internal Audit</h3>
-      <p>Systematic review of internal controls, risk management processes, and operational efficiency to strengthen your organization's governance framework.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div><h3>Internal Audit</h3><p>Systematic review of internal controls, risk management processes, and operational efficiency to strengthen your organization's governance framework.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h2M10 15h4"/></svg>
-      </div>
-      <h3>Bank Audit</h3>
-      <p>Empanelled audit services for public and private sector banks including statutory branch audit, long form audit reports (LFAR), and revenue audit.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h2M10 15h4"/></svg></div><h3>Bank Audit</h3><p>Empanelled audit services for public and private sector banks including statutory branch audit, long form audit reports (LFAR), and revenue audit.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12m0-10v10m0 0l-4-4m4 4l4-4"/><path d="M20 12H4"/></svg>
-      </div>
-      <h3>Concurrent Audit</h3>
-      <p>Continuous and simultaneous examination of banking transactions to ensure compliance with internal policies and regulatory guidelines in real time.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12m0-10v10m0 0l-4-4m4 4l4-4"/><path d="M20 12H4"/></svg></div><h3>Concurrent Audit</h3><p>Continuous and simultaneous examination of banking transactions to ensure compliance with internal policies and regulatory guidelines in real time.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      </div>
-      <h3>ROC Compliances</h3>
-      <p>Company law compliances including incorporation, annual filings, board resolutions, statutory registers, and MCA portal filings for Pvt Ltd, LLPs and OPCs.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>ROC Compliances</h3><p>Company law compliances including incorporation, annual filings, board resolutions, statutory registers, and MCA portal filings for Pvt Ltd, LLPs and OPCs.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h11"/><path d="M16 18l2 2 4-4"/></svg>
-      </div>
-      <h3>Income Tax Litigation</h3>
-      <p>Expert representation before Income Tax Authorities, CIT(Appeals), and the Income Tax Appellate Tribunal (ITAT) — from notices to final orders.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h11"/><path d="M16 18l2 2 4-4"/></svg></div><h3>Income Tax Litigation</h3><p>Expert representation before Income Tax Authorities, CIT(Appeals), and the Income Tax Appellate Tribunal (ITAT) — from notices to final orders.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      </div>
-      <h3>GST Litigation &amp; Appeals</h3>
-      <p>Handling GST show-cause notices, departmental audits, appeals before GST appellate authorities and AAR applications for advance rulings.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>GST Litigation &amp; Appeals</h3><p>Handling GST show-cause notices, departmental audits, appeals before GST appellate authorities and AAR applications for advance rulings.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      </div>
-      <h3>TDS / TCS Compliance</h3>
-      <p>Complete TDS return filing (24Q, 26Q, 27Q), TCS compliance, TRACES portal management, lower deduction certificate applications, and reconciliation.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>TDS / TCS Compliance</h3><p>Complete TDS return filing (24Q, 26Q, 27Q), TCS compliance, TRACES portal management, lower deduction certificate applications, and reconciliation.</p></div>
 
-    <div class="service-card fade-up">
-      <div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      <div class="service-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
-      </div>
-      <h3>Business Advisory &amp; CFO Services</h3>
-      <p>Strategic financial guidance including budgeting, cash flow planning, business restructuring advice, and part-time CFO support for growing SMEs.</p>
-    </div>
+    <div class="service-card fade-up tilt-card"><div class="service-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="service-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div><h3>Business Advisory &amp; CFO Services</h3><p>Strategic financial guidance including budgeting, cash flow planning, business restructuring advice, and part-time CFO support for growing SMEs.</p></div>
 
   </div>
 </section>
@@ -1329,87 +1144,32 @@
   </div>
   <div class="industries-grid">
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M10 20v-5h4v5"/></svg>
-      </div>
-      <div class="industry-name">Manufacturing</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M10 20v-5h4v5"/></svg></div><div class="industry-name">Manufacturing</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-      </div>
-      <div class="industry-name">Real Estate &amp; Construction</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div class="industry-name">Real Estate &amp; Construction</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      </div>
-      <div class="industry-name">Retail &amp; E-commerce</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div class="industry-name">Retail &amp; E-commerce</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
-      <div class="industry-name">Healthcare &amp; Pharma</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="industry-name">Healthcare &amp; Pharma</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><line x1="12" y1="22" x2="12" y2="9"/><path d="M7.5 9v13M16.5 9v13"/></svg>
-      </div>
-      <div class="industry-name">Hotels &amp; Hospitality</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><line x1="12" y1="22" x2="12" y2="9"/><path d="M7.5 9v13M16.5 9v13"/></svg></div><div class="industry-name">Hotels &amp; Hospitality</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-      </div>
-      <div class="industry-name">Education Institutions</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="industry-name">Education Institutions</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h2M10 15h4"/></svg>
-      </div>
-      <div class="industry-name">NBFCs &amp; Financial Services</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h2M10 15h4"/></svg></div><div class="industry-name">NBFCs &amp; Financial Services</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2v6H7zM11 8h2v3h-2zM15 8h2v5h-2z"/></svg>
-      </div>
-      <div class="industry-name">IT &amp; Startups</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2v6H7zM11 8h2v3h-2zM15 8h2v5h-2z"/></svg></div><div class="industry-name">IT &amp; Startups</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      </div>
-      <div class="industry-name">Import / Export &amp; Trading</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="industry-name">Import / Export &amp; Trading</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      </div>
-      <div class="industry-name">NGOs &amp; Trusts</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="industry-name">NGOs &amp; Trusts</div></div>
 
-    <div class="industry-item fade-up">
-      <div class="industry-icon-bg">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path d="M12 12a3 3 0 100-6 3 3 0 000 6z" fill="none"/></svg>
-      </div>
-      <div class="industry-name">Agriculture &amp; Agri-Business</div>
-    </div>
+    <div class="industry-item fade-up"><div class="industry-icon-bg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg></div><div class="industry-name">Agriculture &amp; Agri-Business</div></div>
 
   </div>
 </section>
 
-<!-- Our Values -->
+<!-- OUR VALUES -->
 <section id="Our-Values">
   <div class="why-bg"></div>
   <div class="section-header" style="position:relative;z-index:1;">
@@ -1418,54 +1178,17 @@
     <p class="section-sub">Our driving force are the values we have inherited through decades long client service and the visionary leadership of CA S.P. Agarwal. For us, true value creation has never been about just our technical competence — it's our client-first approach - showing up for our clients everytime. Here are the principals we embody :</p>
   </div>
   <div class="why-grid" style="position:relative;z-index:1;">
-    <div class="why-card fade-up">
-      <div class="why-number">01</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      </div>
-      <h3>Deep Technical Expertise</h3>
-      <p>Our team holds thorough knowledge of direct &amp; indirect tax laws, company law, banking regulations, and auditing standards — updated continuously with evolving legislation.</p>
-    </div>
-    <div class="why-card fade-up">
-      <div class="why-number">02</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </div>
-      <h3>Deadline-Driven Discipline</h3>
-      <p>We track every statutory deadline proactively — so you never receive a demand notice, late fee, or penalty notice due to a missed compliance date.</p>
-    </div>
-    <div class="why-card fade-up">
-      <div class="why-number">03</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-      </div>
-      <h3>Partner-Level Attention</h3>
-      <p>Every client — regardless of size — receives direct attention from our principals. You will always know exactly who is handling your work.</p>
-    </div>
-    <div class="why-card fade-up">
-      <div class="why-number">04</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <h3>Complete Confidentiality</h3>
-      <p>All client information and financial data is treated with strict professional confidentiality under ICAI's Code of Ethics and our firm's internal data security protocols.</p>
-    </div>
-    <div class="why-card fade-up">
-      <div class="why-number">05</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
-      </div>
-      <h3>End-to-End Coverage</h3>
-      <p>From day-to-day bookkeeping to complex litigation before appellate tribunals — we handle the full spectrum so you don't need multiple advisors.</p>
-    </div>
-    <div class="why-card fade-up">
-      <div class="why-number">06</div>
-      <div class="why-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <h3>Proactive Communication</h3>
-      <p>We don't wait for you to ask. Our team provides advance alerts on legislative changes, upcoming due dates, and optimization opportunities relevant to your business.</p>
-    </div>
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">01</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Deep Technical Expertise</h3><p>Our team holds thorough knowledge of direct &amp; indirect tax laws, company law, banking regulations, and auditing standards — updated continuously with evolving legislation.</p></div>
+
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">02</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Deadline-Driven Discipline</h3><p>We track every statutory deadline proactively — so you never receive a demand notice, late fee, or penalty notice due to a missed compliance date.</p></div>
+
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">03</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h3>Partner-Level Attention</h3><p>Every client — regardless of size — receives direct attention from our principals. You will always know exactly who is handling your work.</p></div>
+
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">04</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Complete Confidentiality</h3><p>All client information and financial data is treated with strict professional confidentiality under ICAI's Code of Ethics and our firm's internal data security protocols.</p></div>
+
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">05</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div><h3>End-to-End Coverage</h3><p>From day-to-day bookkeeping to complex litigation before appellate tribunals — we handle the full spectrum so you don't need multiple advisors.</p></div>
+
+    <div class="why-card fade-up tilt-glow-card"><div class="why-card-glow"></div><div class="why-number">06</div><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h3>Proactive Communication</h3><p>We don't wait for you to ask. Our team provides advance alerts on legislative changes, upcoming due dates, and optimization opportunities relevant to your business.</p></div>
   </div>
 </section>
 
@@ -1477,26 +1200,175 @@
     <p class="section-sub" style="margin:14px auto 0;">A structured, transparent engagement process from first conversation to delivered compliance.</p>
   </div>
   <div class="process-steps">
-    <div class="process-step fade-up">
-      <div class="step-num">01</div>
-      <h4>Initial Consultation</h4>
-      <p>We begin with a no-obligation discovery call to understand your business, compliance history, and specific requirements.</p>
+    <div class="process-step fade-up"><div class="step-num">01</div><h4>Initial Consultation</h4><p>We begin with a no-obligation discovery call to understand your business, compliance history, and specific requirements.</p></div>
+    <div class="process-step fade-up"><div class="step-num">02</div><h4>Scope &amp; Proposal</h4><p>We prepare a clear engagement letter outlining the scope of services, timelines, fees, and deliverables — no hidden charges.</p></div>
+    <div class="process-step fade-up"><div class="step-num">03</div><h4>Execution</h4><p>Our team executes the engagement with regular updates. All work is reviewed at partner level before submission or delivery.</p></div>
+    <div class="process-step fade-up"><div class="step-num">04</div><h4>Ongoing Support</h4><p>Post-delivery, we remain available for queries and provide proactive alerts on changes affecting your compliance obligations.</p></div>
+  </div>
+</section>
+
+<!-- COMPLIANCE CALENDAR -->
+<section id="calendar">
+  <div class="section-header">
+    <div class="section-label">Never Miss a Deadline</div>
+    <h2 class="section-heading">Key Statutory Due Dates</h2>
+    <p class="section-sub">A quick reference to recurring compliance deadlines under Income Tax, GST, and labour law. Exact dates may shift for holidays or government extensions — always confirm with our team.</p>
+  </div>
+  <div class="calendar-grid">
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">11th</div>
+      <div class="cal-title">GSTR-1 Filing</div>
+      <div class="cal-desc">Monthly outward supply return due on the 11th of every month for regular taxpayers.</div>
     </div>
-    <div class="process-step fade-up">
-      <div class="step-num">02</div>
-      <h4>Scope &amp; Proposal</h4>
-      <p>We prepare a clear engagement letter outlining the scope of services, timelines, fees, and deliverables — no hidden charges.</p>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">20th</div>
+      <div class="cal-title">GSTR-3B Filing</div>
+      <div class="cal-desc">Monthly summary return and tax payment due on the 20th of every month.</div>
     </div>
-    <div class="process-step fade-up">
-      <div class="step-num">03</div>
-      <h4>Execution</h4>
-      <p>Our team executes the engagement with regular updates. All work is reviewed at partner level before submission or delivery.</p>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">7th</div>
+      <div class="cal-title">TDS Payment</div>
+      <div class="cal-desc">Tax deducted at source for the previous month must be deposited by the 7th.</div>
     </div>
-    <div class="process-step fade-up">
-      <div class="step-num">04</div>
-      <h4>Ongoing Support</h4>
-      <p>Post-delivery, we remain available for queries and provide proactive alerts on changes affecting your compliance obligations.</p>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">15th</div>
+      <div class="cal-title">PF &amp; ESI Payment</div>
+      <div class="cal-desc">Provident Fund and ESI contributions for the previous month are due by the 15th.</div>
     </div>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">31 Jul</div>
+      <div class="cal-title">ITR Filing (Non-Audit)</div>
+      <div class="cal-desc">Income Tax Return due date for individuals and entities not requiring tax audit.</div>
+    </div>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">30 Sep</div>
+      <div class="cal-title">Tax Audit Report</div>
+      <div class="cal-desc">Form 3CA/3CB and 3CD must be filed for entities liable under Section 44AB.</div>
+    </div>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">31 Oct</div>
+      <div class="cal-title">ITR Filing (Audit Cases)</div>
+      <div class="cal-desc">Extended due date for taxpayers whose accounts require statutory or tax audit.</div>
+    </div>
+
+    <div class="cal-card fade-up tilt-card">
+      <div class="cal-date-badge">Quarterly</div>
+      <div class="cal-title">Advance Tax Instalments</div>
+      <div class="cal-desc">Due on 15 Jun, 15 Sep, 15 Dec, and 15 Mar based on cumulative tax liability.</div>
+    </div>
+
+  </div>
+  <div class="calendar-note">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Dates shown are general statutory due dates and may vary based on entity type, turnover, or government notifications.
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <p class="section-sub">Quick answers to questions we hear often from clients and prospective clients.</p>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Do I need a Chartered Accountant to file my Income Tax Return?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">While individuals with simple salary income can self-file, a CA is strongly recommended if you have business income, capital gains, multiple income sources, foreign assets, or are claiming complex deductions — to ensure accuracy and avoid scrutiny notices.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What is the penalty for late GST return filing?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Late filing attracts a late fee per day of delay, plus interest at 18% per annum on the outstanding tax liability. Repeated non-compliance can also lead to suspension of GST registration, so timely filing is essential.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>When is a Tax Audit mandatory under Section 44AB?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">A tax audit is generally required for businesses with turnover exceeding the prescribed threshold, and for professionals exceeding their respective gross receipts threshold. Different limits apply depending on cash transaction percentages — our team can confirm applicability to your specific situation.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How long does company incorporation and ROC registration take?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">A Private Limited Company or LLP can typically be incorporated within 7-10 working days once all documentation (DSC, DIN, name approval, MOA/AOA) is in order, though timelines depend on MCA processing speed.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can you represent my case before the Income Tax or GST appellate authorities?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes. We represent clients before Assessing Officers, CIT(Appeals), ITAT, and GST appellate authorities — handling everything from notice response drafting to final hearing representation.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you work with clients outside Delhi NCR?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes, while our office is based in Delhi NCR, we serve clients across India remotely for return filing, GST compliance, advisory, and most audit engagements via digital documentation and video consultations.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUICK RESOURCES -->
+<section id="resources">
+  <div class="section-header">
+    <div class="section-label">Useful Links</div>
+    <h2 class="section-heading">Official Government Portals</h2>
+    <p class="section-sub">Quick access to the official portals you may need for filings, payments, and verification.</p>
+  </div>
+  <div class="resources-grid">
+    <a href="https://www.incometax.gov.in" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+      <div><div class="resource-text-title">Income Tax e-Filing</div><div class="resource-text-sub">incometax.gov.in</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+    <a href="https://www.gst.gov.in" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 14l6-6"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="14" r="2"/></svg></div>
+      <div><div class="resource-text-title">GST Portal</div><div class="resource-text-sub">gst.gov.in</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+    <a href="https://www.mca.gov.in" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+      <div><div class="resource-text-title">MCA / ROC Portal</div><div class="resource-text-sub">mca.gov.in</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+    <a href="https://www.icai.org" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div class="resource-text-title">ICAI</div><div class="resource-text-sub">icai.org</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+    <a href="https://www.tin-nsdl.com" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div><div class="resource-text-title">TRACES / TDS</div><div class="resource-text-sub">tdscpc.gov.in</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+    <a href="https://www.epfindia.gov.in" target="_blank" rel="noopener" class="resource-link tilt-card">
+      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <div><div class="resource-text-title">EPFO Portal</div><div class="resource-text-sub">epfindia.gov.in</div></div>
+      <svg class="resource-external" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1508,55 +1380,29 @@
     <p class="section-sub">Latest circulars, notifications, judgments, and amendments — automatically pulled from trusted tax &amp; corporate law publications.</p>
   </div>
   <div class="news-grid">
-
     <div>
-      <div class="news-col-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        <span class="news-col-title">Income Tax</span>
-      </div>
+      <div class="news-col-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span class="news-col-title">Income Tax</span></div>
       <div id="feed-it"><div class="news-loading">Loading updates...</div></div>
-      <div class="news-feed-credit">Source: TaxGuru</div>
     </div>
-
     <div>
-      <div class="news-col-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M9 14l6-6"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="14" r="2"/></svg>
-        <span class="news-col-title">GST Updates</span>
-      </div>
+      <div class="news-col-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="2"><path d="M9 14l6-6"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="14" r="2"/></svg><span class="news-col-title">GST Updates</span></div>
       <div id="feed-gst"><div class="news-loading">Loading updates...</div></div>
-      <div class="news-feed-credit">Source: TaxGuru</div>
     </div>
-
     <div>
-      <div class="news-col-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-        <span class="news-col-title">Company Law / MCA</span>
-      </div>
+      <div class="news-col-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg><span class="news-col-title">Company Law / MCA</span></div>
       <div id="feed-mca"><div class="news-loading">Loading updates...</div></div>
-      <div class="news-feed-credit">Source: TaxGuru</div>
     </div>
-
     <div>
-      <div class="news-col-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="news-col-title">Judiciary &amp; Case Laws</span>
-      </div>
+      <div class="news-col-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="news-col-title">Judiciary &amp; Case Laws</span></div>
       <div id="feed-judiciary"><div class="news-loading">Loading updates...</div></div>
-      <div class="news-feed-credit">Source: TaxGuru</div>
     </div>
-
     <div>
-      <div class="news-col-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        <span class="news-col-title">RBI / FEMA</span>
-      </div>
+      <div class="news-col-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="news-col-title">RBI / FEMA</span></div>
       <div id="feed-rbi"><div class="news-loading">Loading updates...</div></div>
-      <div class="news-feed-credit">Source: TaxGuru</div>
     </div>
-
   </div>
   <div class="news-source-credit">
-    All updates sourced from <a href="https://taxguru.in" target="_blank" rel="noopener">TaxGuru.in</a> — a trusted publication for CA, CS &amp; tax professionals &nbsp;·&nbsp;
+    All updates sourced from <a href="https://taxguru.in" target="_blank" rel="noopener">TaxGuru.in</a> — clicking any headline opens the original article &nbsp;·&nbsp;
     <a href="https://taxguru.in" target="_blank" rel="noopener">Visit TaxGuru →</a>
   </div>
 </section>
@@ -1572,52 +1418,30 @@
     <div class="contact-info fade-up">
       <div class="contact-details">
         <div class="contact-detail-item">
-          <div class="contact-detail-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Email</div>
-            <div class="value">caspagarwal@gmail.com</div>
-          </div>
+          <div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="contact-detail-text"><div class="label">Email</div><div class="value">caspagarwal@gmail.com</div></div>
         </div>
         <div class="contact-detail-item">
-          <div class="contact-detail-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Phone</div>
-            <div class="value">+91-9810449060</div>
-          </div>
+          <div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="contact-detail-text"><div class="label">Phone</div><div class="value">+91-9810449060</div></div>
         </div>
         <div class="contact-detail-item">
-          <div class="contact-detail-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Location</div>
-            <div class="value">Delhi NCR, India</div>
-          </div>
+          <div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="contact-detail-text"><div class="label">Location</div><div class="value">Delhi NCR, India</div></div>
         </div>
         <div class="contact-detail-item">
-          <div class="contact-detail-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Office Hours</div>
-            <div class="value">Mon–Sat: 10:00 AM – 7:00 PM</div>
-          </div>
+          <div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="contact-detail-text"><div class="label">Office Hours</div><div class="value">Mon–Sat: 10:00 AM – 7:00 PM</div></div>
         </div>
       </div>
       <div class="icai-membership">
-        <svg class="icai-logo-full" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="23" fill="#0D1B2A" stroke="#C9A84C" stroke-width="1.5"/>
-          <circle cx="24" cy="24" r="18" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-dasharray="2 2"/>
-          <text x="24" y="20" text-anchor="middle" fill="#C9A84C" font-size="7.5" font-weight="700" font-family="Georgia,serif" letter-spacing="0.5">ICAI</text>
-          <path d="M14 24 Q24 18 34 24" stroke="#C9A84C" stroke-width="1.2" fill="none"/>
-          <path d="M14 27 Q24 21 34 27" stroke="#C9A84C" stroke-width="0.7" fill="none" opacity="0.5"/>
-          <text x="24" y="34" text-anchor="middle" fill="#C9A84C" font-size="4.5" font-family="Georgia,serif" letter-spacing="0.3">EST. 1949</text>
-          <circle cx="24" cy="13" r="3" fill="#C9A84C" opacity="0.8"/>
-          <path d="M21 13 L24 10 L27 13" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="23" fill="#2A2517" stroke="#B97A45" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#B97A45" stroke-width="0.7" stroke-dasharray="2 2"/>
+          <text x="24" y="20" text-anchor="middle" fill="#B97A45" font-size="7.5" font-weight="700" font-family="Georgia,serif">ICAI</text>
+          <path d="M14 24 Q24 18 34 24" stroke="#B97A45" stroke-width="1.2" fill="none"/>
+          <text x="24" y="34" text-anchor="middle" fill="#B97A45" font-size="4.5" font-family="Georgia,serif">EST. 1949</text>
+          <circle cx="24" cy="13" r="3" fill="#B97A45" opacity="0.8"/>
         </svg>
         <div class="icai-membership-text">
           <div class="t1">Member — Institute of Chartered Accountants of India</div>
@@ -1629,22 +1453,12 @@
     <div class="contact-form-wrap fade-up">
       <div class="form-title">Send Us a Message</div>
       <div class="form-sub">Fill in the form below and we'll get back to you within 24 hours.</div>
-
       <form id="contactForm" action="https://formspree.io/f/xykaoegy" method="POST">
         <div class="form-row">
-          <div class="form-group">
-            <label for="fname">Full Name *</label>
-            <input type="text" id="fname" name="name" placeholder="Rajesh Kumar" required>
-          </div>
-          <div class="form-group">
-            <label for="fphone">Contact Number *</label>
-            <input type="tel" id="fphone" name="phone" placeholder="+91 XXXXXXXXXX" required>
-          </div>
+          <div class="form-group"><label for="fname">Full Name *</label><input type="text" id="fname" name="name" placeholder="Rajesh Kumar" required></div>
+          <div class="form-group"><label for="fphone">Contact Number *</label><input type="tel" id="fphone" name="phone" placeholder="+91 98765 43210" required></div>
         </div>
-        <div class="form-group">
-          <label for="femail">Email Address *</label>
-          <input type="email" id="femail" name="email" placeholder="rajesh@company.com" required>
-        </div>
+        <div class="form-group"><label for="femail">Email Address *</label><input type="email" id="femail" name="email" placeholder="rajesh@company.com" required></div>
         <div class="form-group">
           <label for="fservice">Service Interested In</label>
           <select id="fservice" name="service">
@@ -1665,21 +1479,15 @@
             <option>Other / General Enquiry</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="fmsg">Your Query / Message *</label>
-          <textarea id="fmsg" name="message" placeholder="Please describe your requirement briefly..." required></textarea>
-        </div>
+        <div class="form-group"><label for="fmsg">Your Query / Message *</label><textarea id="fmsg" name="message" placeholder="Please describe your requirement briefly..." required></textarea></div>
         <button type="submit" class="form-submit" id="submitBtn">
           Send Enquiry
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
         </button>
-        <p class="form-note">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Your information is kept strictly confidential and used only to respond to your enquiry.
-        </p>
+        <p class="form-note">Your information is kept strictly confidential and used only to respond to your enquiry.</p>
       </form>
       <div class="form-success" id="formSuccess">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" style="margin-bottom:12px"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8F5E2A" stroke-width="1.5" style="margin-bottom:12px"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
         <h4>Thank You for Reaching Out!</h4>
         <p>We have received your enquiry and will respond within one business day.</p>
       </div>
@@ -1691,32 +1499,22 @@
 <footer>
   <div class="footer-bg"></div>
   <div class="footer-top">
-    <div class="footer-brand-col">
+    <div>
       <div class="footer-logo">
         <div class="footer-logo-mark">S</div>
-        <div>
-          <div class="footer-firm-name">S Prasad Agarwal &amp; Co.</div>
-          <div class="footer-firm-type">Chartered Accountants</div>
-        </div>
+        <div><div class="footer-firm-name">S Prasad Agarwal &amp; Co.</div><div class="footer-firm-type">Chartered Accountants</div></div>
       </div>
-      <p class="footer-desc">Your compliance, our commitment. A trusted CA firm serving businesses across Delhi NCR and India with integrity, expertise, and professional excellence.</p>
+      <p class="footer-desc">A full-service Chartered Accountancy firm serving businesses and individuals across Delhi NCR and India with integrity, expertise, and professional diligence.</p>
       <div class="footer-social">
-        <a href="#" class="social-btn" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="https://wa.me/919810449060" class="social-btn" aria-label="WhatsApp">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        </a>
-        <a href="mailto:caspagarwal@gmail.com" class="social-btn" aria-label="Email">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
+        <a href="https://wa.me/919810449060" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        <a href="mailto:caspagarwal@gmail.com" class="social-btn" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
       </div>
     </div>
 
     <div>
       <div class="footer-col-title">Services</div>
       <ul class="footer-links">
-        <li><a href="#services">Income Tax Return Filing</a></li>
+        <li><a href="#services">Income Tax Filing</a></li>
         <li><a href="#services">Accounting &amp; Bookkeeping</a></li>
         <li><a href="#services">GST Filing &amp; Advisory</a></li>
         <li><a href="#services">Statutory &amp; Tax Audit</a></li>
@@ -1738,233 +1536,214 @@
     </div>
 
     <div>
-      <div class="footer-col-title">Contact</div>
-      <ul class="footer-links" style="gap:14px">
-        <li style="list-style:none">
-          <span style="font-size:12px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:6px">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            caspagarwal@gmail.com
-          </span>
-        </li>
-        <li style="list-style:none">
-          <span style="font-size:12px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:6px">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            +91-9810449060
-          </span>
-        </li>
-        <li style="list-style:none">
-          <span style="font-size:12px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:6px">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Delhi NCR, India
-          </span>
-        </li>
-        <li style="list-style:none">
-          <span style="font-size:12px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:6px">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            Mon–Sat: 10:00–19:00
-          </span>
-        </li>
-      </ul>
+      <div class="footer-col-title">Visit Us</div>
+      <div class="footer-contact-list">
+        <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>caspagarwal@gmail.com</span>
+        <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+91-9810449060</span>
+        <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Mon–Sat: 10:00–19:00</span>
+      </div>
+      <!--
+        MAP SETUP: Replace the query in the iframe src below with your exact office address
+        or paste your own "Share > Embed a map" link from Google Maps for a precise pin.
+        Current default centers on Delhi NCR as a placeholder.
+      -->
+      <div class="footer-map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=S+Prasad+Agarwal+%26+Co,+Delhi+NCR,+India&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          aria-label="Office location map">
+        </iframe>
+        <div class="footer-map-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Delhi NCR Office
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <div class="footer-copy">
-      &copy; 2024–2025 <span>S Prasad Agarwal &amp; Co.</span>, Chartered Accountants. All rights reserved.
-    </div>
-    <div class="footer-disclaimer">
-      This website is for informational purposes only. Information provided does not constitute professional legal or tax advice or solicitation / advertisement of professional services. Please consult directly for specific advice.
-    </div>
+    <div class="footer-copy">&copy; 2025 <span>S Prasad Agarwal &amp; Co.</span>, Chartered Accountants. All rights reserved.</div>
+    <div class="footer-disclaimer">This website is for informational purposes only and does not constitute professional, legal, or tax advice, nor does it solicit professional work. Please consult directly for specific advice.</div>
   </div>
 </footer>
 
-<!-- WhatsApp Float -->
 <a href="https://wa.me/919810449060?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20CA%20services." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<div class="scrolltop-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+</div>
+
 <script>
-  // Navbar scroll
-  const navbar = document.getElementById('navbar');
-  const progressBar = document.getElementById('progressBar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) navbar.classList.add('scrolled');
-    else navbar.classList.remove('scrolled');
-    const scrollPct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    progressBar.style.width = scrollPct + '%';
-  });
+// ── NAV + SUBNAV SCROLL SYNC + PROGRESS BAR ──
+const navbar = document.getElementById('navbar');
+const subnav = document.getElementById('subnav');
+const progressBar = document.getElementById('progressBar');
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 50) { navbar.classList.add('scrolled'); subnav.classList.add('scrolled'); }
+  else { navbar.classList.remove('scrolled'); subnav.classList.remove('scrolled'); }
+  var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = pct + '%';
+  if (window.scrollY > 600) scrollTopBtn.classList.add('show');
+  else scrollTopBtn.classList.remove('show');
+});
 
-  // Mobile menu
-  function toggleMenu() {
-    const nl = document.getElementById('navLinks');
-    const h1 = document.getElementById('h1');
-    const h2 = document.getElementById('h2');
-    const h3 = document.getElementById('h3');
-    nl.classList.toggle('open');
-    if (nl.classList.contains('open')) {
-      h1.style.transform = 'translateY(7px) rotate(45deg)';
-      h2.style.opacity = '0';
-      h3.style.transform = 'translateY(-7px) rotate(-45deg)';
-    } else {
-      h1.style.transform = ''; h2.style.opacity = ''; h3.style.transform = '';
+// ── SCROLL-TRIGGERED FADE-UP ──
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+// ── ACTIVE SUB-NAV HIGHLIGHT ──
+var sections = document.querySelectorAll('section[id]');
+var navLinks = document.querySelectorAll('.subnav-inner a[href^="#"]');
+window.addEventListener('scroll', function() {
+  var current = '';
+  sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 135) current = s.getAttribute('id'); });
+  navLinks.forEach(function(link) {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// ── HERO CURSOR-FOLLOW GLOW ──
+var heroSection = document.getElementById('hero');
+var heroGlow = document.getElementById('heroCursorGlow');
+if (heroSection && heroGlow) {
+  heroSection.addEventListener('mousemove', function(e) {
+    var rect = heroSection.getBoundingClientRect();
+    heroGlow.style.left = (e.clientX - rect.left) + 'px';
+    heroGlow.style.top = (e.clientY - rect.top) + 'px';
+  });
+}
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.magnetic').forEach(function(btn) {
+  btn.addEventListener('mousemove', function(e) {
+    var rect = btn.getBoundingClientRect();
+    var x = e.clientX - rect.left - rect.width / 2;
+    var y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = 'translate(' + (x * 0.18) + 'px, ' + (y * 0.28) + 'px)';
+  });
+  btn.addEventListener('mouseleave', function() { btn.style.transform = ''; });
+});
+
+// ── SERVICE CARD 3D TILT ──
+document.querySelectorAll('.tilt-card').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var rect = card.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var rotateX = ((y / rect.height) - 0.5) * -6;
+    var rotateY = ((x / rect.width) - 0.5) * 6;
+    card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-5px)';
+  });
+  card.addEventListener('mouseleave', function() { card.style.transform = ''; });
+});
+
+// ── WHY-US CARD CURSOR GLOW ──
+document.querySelectorAll('.tilt-glow-card').forEach(function(card) {
+  var glow = card.querySelector('.why-card-glow');
+  card.addEventListener('mousemove', function(e) {
+    var rect = card.getBoundingClientRect();
+    glow.style.left = (e.clientX - rect.left) + 'px';
+    glow.style.top = (e.clientY - rect.top) + 'px';
+  });
+});
+
+// ── FAQ ACCORDION ──
+function toggleFaq(el) {
+  var item = el.parentElement;
+  var answer = item.querySelector('.faq-answer');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+    if (openItem !== item) {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = null;
     }
-  }
-  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('open');
-    document.getElementById('h1').style.transform = '';
-    document.getElementById('h2').style.opacity = '';
-    document.getElementById('h3').style.transform = '';
-  }));
-
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Counter animation
-  function animateCounter(el, target, suffix) {
-    let current = 0;
-    const step = Math.ceil(target / 40);
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = current + suffix;
-      if (current >= target) clearInterval(timer);
-    }, 40);
-  }
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        statsObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  // Form submission
-  const form = document.getElementById('contactForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const formSuccess = document.getElementById('formSuccess');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-
-    const formData = new FormData(form);
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.style.display = 'none';
-        formSuccess.classList.add('show');
-      } else {
-        submitBtn.innerHTML = 'Send Enquiry <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>';
-        submitBtn.disabled = false;
-        alert('There was an error. Please try again or call us directly.');
-      }
-    } catch {
-      submitBtn.innerHTML = 'Send Enquiry';
-      submitBtn.disabled = false;
-    }
   });
-
-  // Smooth active nav highlight
-  const sections = document.querySelectorAll('section[id], #contact');
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
-    });
-    navLinks.forEach(link => {
-      link.style.color = '';
-      if (link.getAttribute('href') === '#' + current) link.style.color = '#C9A84C';
-    });
-  });
-
-  // ── RSS NEWS FEEDS ──
-  // STEP: After signing up at rss2json.com, replace the string below with your API key.
-  const RSS2JSON_API_KEY = 'q4a5bc2h3fdp2j2tca2iiu33robg7um6gehyfzpl';
-
-  const newsFeeds = [
-    { id: 'feed-it',        url: 'https://taxguru.in/category/income-tax/feed/',            count: 6 },
-    { id: 'feed-gst',       url: 'https://taxguru.in/category/goods-and-service-tax/feed/', count: 6 },
-    { id: 'feed-mca',       url: 'https://taxguru.in/category/corporate-law/feed/',         count: 6 },
-    { id: 'feed-judiciary', url: 'https://taxguru.in/category/income-tax/income-tax-case-laws/feed/', count: 6 },
-    { id: 'feed-rbi',       url: 'https://taxguru.in/category/fema-banking/feed/',           count: 6 }
-  ];
-
-  function loadFeed(feed) {
-    const container = document.getElementById(feed.id);
-    const apiUrl = 'https://api.rss2json.com/v1/api.json'
-      + '?rss_url=' + encodeURIComponent(feed.url)
-      + '&api_key=' + RSS2JSON_API_KEY
-      + '&count=' + feed.count;
-
-    fetch(apiUrl)
-      .then(r => r.json())
-      .then(data => {
-        if (!data.items || data.items.length === 0) {
-          container.innerHTML = '<div class="news-error">No updates found. <a href="https://taxguru.in" target="_blank" style="color:#C9A84C">Visit TaxGuru →</a></div>';
-          return;
-        }
-        container.innerHTML = data.items.map(item => {
-          const date = new Date(item.pubDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-          return `<a href="${item.link}" target="_blank" rel="noopener" class="news-item">
-            <div class="news-date">${date}</div>
-            <div class="news-title">${item.title}</div>
-          </a>`;
-        }).join('');
-      })
-      .catch(() => {
-        container.innerHTML = '<div class="news-error">Could not load updates. <a href="https://taxguru.in" target="_blank" style="color:#C9A84C">Visit TaxGuru →</a></div>';
-      });
-  }
-
-  if (RSS2JSON_API_KEY !== 'q4a5bc2h3fdp2j2tca2iiu33robg7um6gehyfzpl') {
-    newsFeeds.forEach(loadFeed);
+  if (isOpen) {
+    item.classList.remove('open');
+    answer.style.maxHeight = null;
   } else {
-    const placeholders = {
-      'feed-it': [
-        ['Jun 2025', 'CBDT notifies amended Income Tax Rules for FY 2025-26'],
-        ['May 2025', 'New TDS thresholds announced under Finance Act 2025'],
-        ['May 2025', 'CBDT extends due date for filing Form 10B/10BB']
-      ],
-      'feed-gst': [
-        ['Jun 2025', 'GST Council clarifies ITC eligibility on construction services'],
-        ['May 2025', 'GSTN enables new e-invoice validation rules from June 2025'],
-        ['May 2025', 'CBIC issues clarification on GST rate for hostel accommodation']
-      ],
-      'feed-mca': [
-        ['Jun 2025', 'MCA issues new compliance calendar for LLPs and companies'],
-        ['May 2025', 'MCA extends due date for filing DPT-3 for FY 2024-25'],
-        ['May 2025', 'New e-form for Significant Beneficial Owner declaration notified']
-      ],
-      'feed-judiciary': [
-        ['Jun 2025', 'ITAT ruling: Reassessment beyond 6 years held time-barred'],
-        ['May 2025', 'High Court allows ITC despite late filing on procedural grounds'],
-        ['May 2025', 'Supreme Court clarifies scope of Section 148A reassessment notice']
-      ],
-      'feed-rbi': [
-        ['Jun 2025', 'RBI updates FEMA guidelines for overseas investment reporting'],
-        ['May 2025', 'RBI revises master directions on NBFC compliance'],
-        ['May 2025', 'New LRS reporting requirements effective from FY 2025-26']
-      ]
-    };
-    Object.keys(placeholders).forEach(id => {
-      const el = document.getElementById(id);
-      let html = '<div class="news-error" style="color:#C9A84C;padding-bottom:10px;"></div>';
-      placeholders[id].forEach(([date, title]) => {
-        html += `<div class="news-item"><div class="news-date">${date}</div><div class="news-title">${title}</div></div>`;
-      });
-      el.innerHTML = html;
-    });
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
   }
+}
+
+// ── CONTACT FORM SUBMISSION ──
+var form = document.getElementById('contactForm');
+var submitBtn = document.getElementById('submitBtn');
+var formSuccess = document.getElementById('formSuccess');
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+  try {
+    var res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.style.display = 'none'; formSuccess.classList.add('show'); }
+    else {
+      submitBtn.innerHTML = 'Send Enquiry <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>';
+      submitBtn.disabled = false;
+      alert('There was an error. Please try again or call us directly.');
+    }
+  } catch (err) {
+    submitBtn.innerHTML = 'Send Enquiry';
+    submitBtn.disabled = false;
+  }
+});
+
+// ── RSS NEWS FEEDS ──
+// These fetch from /api/feed-* on this SAME domain. Netlify proxies each path
+// to the real TaxGuru feed server-side (see the _redirects file) — so the
+// browser never talks to a third-party CORS proxy at all, only to this site.
+const newsFeeds = [
+  { id: 'feed-it',        url: '/api/feed-income-tax', sourceUrl: 'https://taxguru.in/category/income-tax/feed/',                       count: 6 },
+  { id: 'feed-gst',       url: '/api/feed-gst',        sourceUrl: 'https://taxguru.in/category/goods-and-service-tax/feed/',            count: 6 },
+  { id: 'feed-mca',       url: '/api/feed-mca',        sourceUrl: 'https://taxguru.in/category/corporate-law/feed/',                    count: 6 },
+  { id: 'feed-judiciary', url: '/api/feed-judiciary',  sourceUrl: 'https://taxguru.in/type/judiciary-2/feed/',                          count: 6 },
+  { id: 'feed-rbi',       url: '/api/feed-rbi',        sourceUrl: 'https://taxguru.in/category/rbi/feed/',                               count: 6 }
+];
+
+function loadFeed(feed) {
+  const container = document.getElementById(feed.id);
+
+  fetch(feed.url)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Network response was not ok');
+      return r.text();
+    })
+    .then(function(xmlText) {
+      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+      const items = Array.from(xml.querySelectorAll('item')).slice(0, feed.count);
+      if (items.length === 0) {
+        container.innerHTML = '<div class="news-error">No updates found. <a href="https://taxguru.in" target="_blank" style="color:#8F5E2A">Visit TaxGuru →</a></div>';
+        return;
+      }
+      // Each <link> below is the original TaxGuru article permalink straight from
+      // the RSS feed itself — clicking any headline opens that exact article.
+      container.innerHTML = items.map(function(item) {
+        var titleEl = item.querySelector('title');
+        var linkEl = item.querySelector('link');
+        var dateEl = item.querySelector('pubDate');
+        var title = titleEl ? titleEl.textContent : 'Untitled update';
+        var link = linkEl ? linkEl.textContent : feed.sourceUrl;
+        var dateObj = dateEl ? new Date(dateEl.textContent) : null;
+        var date = (dateObj && !isNaN(dateObj)) ? dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+        return '<a href="' + link + '" target="_blank" rel="noopener" class="news-item">'
+          + '<div class="news-date">' + date + '</div>'
+          + '<div class="news-title">' + title + '</div>'
+          + '</a>';
+      }).join('');
+    })
+    .catch(function() {
+      container.innerHTML = '<div class="news-error">Could not load updates. <a href="https://taxguru.in" target="_blank" style="color:#8F5E2A">Visit TaxGuru →</a></div>';
+    });
+}
+newsFeeds.forEach(loadFeed);
 </script>
 </body>
 </html>
